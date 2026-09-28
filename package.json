@@ -2,11 +2,29 @@
   "name": "ui-library",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
   "scripts": {
-    "dev": "next dev",
+    "generate": "node scripts/generate.ts",
+    "dev": "node scripts/generate.ts --watch & next dev",
+    "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run generate && npm run lint && npm run typecheck && npm run format:check",
+    "prestorybook": "npm run generate",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "npm run generate && storybook build",
+    "test": "vitest run --project storybook",
+    "docs:up": "docker compose -f docmost/docker-compose.yml up -d",
+    "docs:down": "docker compose -f docmost/docker-compose.yml down",
+    "docs:logs": "docker compose -f docmost/docker-compose.yml logs -f docmost",
+    "docs:export": "node scripts/docs-export.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -19,16 +37,25 @@
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-vitest": "^10.6.0",
+    "@storybook/nextjs-vite": "^10.6.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.19.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser-playwright": "^4.1.11",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "eslint-config-prettier": "^10.1.8",
+    "playwright": "^1.63.0",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "storybook": "^10.6.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.3.1",
+    "vitest": "^4.1.11"
   }
 }

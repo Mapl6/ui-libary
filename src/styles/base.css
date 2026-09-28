@@ -1,0 +1,206 @@
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background: var(--ui-background);
+    color: var(--ui-foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  :where(*, ::before, ::after) {
+    border-color: var(--ui-border);
+  }
+
+  ::selection {
+    background: var(--ui-primary-subtle);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ui-ring);
+    outline-offset: 2px;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  /* Lock page scroll while a modal <dialog> is open. */
+  html:has(dialog[open]:modal) {
+    overflow: hidden;
+  }
+
+  /* Preview frames can emulate reduced motion via data-reduced-motion. */
+  :root[data-reduced-motion] *,
+  :root[data-reduced-motion] *::before,
+  :root[data-reduced-motion] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border-strong) transparent;
+}
+
+@utility canvas-grid {
+  background-color: var(--ui-surface);
+  background-image: radial-gradient(var(--ui-border) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Syntax colors for sugar-high, tuned per theme. */
+:root {
+  --sh-class: oklch(0.52 0.16 300);
+  --sh-identifier: var(--ui-foreground);
+  --sh-sign: var(--ui-foreground-muted);
+  --sh-property: oklch(0.5 0.15 250);
+  --sh-entity: oklch(0.5 0.15 250);
+  --sh-jsxliterals: var(--ui-foreground);
+  --sh-string: oklch(0.52 0.13 150);
+  --sh-keyword: oklch(0.55 0.2 15);
+  --sh-comment: var(--ui-foreground-subtle);
+}
+
+[data-theme="dark"] {
+  --sh-class: oklch(0.78 0.12 300);
+  --sh-property: oklch(0.78 0.11 240);
+  --sh-entity: oklch(0.78 0.11 240);
+  --sh-string: oklch(0.8 0.13 150);
+  --sh-keyword: oklch(0.74 0.16 15);
+}
+
+.code-highlight .sh__line {
+  display: block;
+  min-height: 1lh;
+}
+
+/* Long-form documentation (component docs and guides). */
+@layer components {
+  .prose-doc {
+    max-width: 48rem;
+    color: var(--ui-foreground);
+    font-size: var(--text-md);
+    line-height: 1.7;
+
+    & > * + * {
+      margin-top: 0.875rem;
+    }
+    & h1 {
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl--line-height);
+      font-weight: 600;
+      letter-spacing: var(--tracking-tight);
+    }
+    & h2 {
+      margin-top: 2.25rem;
+      font-size: var(--text-xl);
+      line-height: var(--text-xl--line-height);
+      font-weight: 600;
+      letter-spacing: var(--tracking-tight);
+    }
+    & h3 {
+      margin-top: 1.75rem;
+      font-size: var(--text-lg);
+      font-weight: 600;
+    }
+    & > :first-child {
+      margin-top: 0;
+    }
+    & p,
+    & li {
+      color: var(--ui-foreground-muted);
+    }
+    & strong {
+      color: var(--ui-foreground);
+      font-weight: 600;
+    }
+    & a {
+      color: var(--ui-primary);
+      text-underline-offset: 3px;
+    }
+    & a:hover {
+      text-decoration: underline;
+    }
+    & ul {
+      list-style: disc;
+      padding-inline-start: 1.25rem;
+    }
+    & ol {
+      list-style: decimal;
+      padding-inline-start: 1.25rem;
+    }
+    & li + li {
+      margin-top: 0.25rem;
+    }
+    & :not(pre) > code {
+      border-radius: var(--radius-xs);
+      background: var(--ui-neutral-subtle);
+      padding: 0.1em 0.35em;
+      font-size: 0.85em;
+      color: var(--ui-foreground);
+    }
+    & .md-pre {
+      overflow-x: auto;
+      border: 1px solid var(--ui-border);
+      border-radius: var(--radius-lg);
+      background: var(--ui-surface-muted);
+      padding: 0.75rem 1rem;
+      font-size: 0.8125rem;
+      line-height: 1.375rem;
+      text-align: left;
+    }
+    & .md-table {
+      overflow-x: auto;
+      border: 1px solid var(--ui-border);
+      border-radius: var(--radius-lg);
+    }
+    & table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+    & th {
+      background: var(--ui-surface-muted);
+      text-align: start;
+      font-weight: 500;
+      color: var(--ui-foreground-muted);
+    }
+    & th,
+    & td {
+      padding: 0.5rem 0.75rem;
+      border-top: 1px solid var(--ui-border);
+      text-align: start;
+    }
+    & thead th {
+      border-top: 0;
+    }
+    & blockquote {
+      border-inline-start: 3px solid var(--ui-border-strong);
+      padding-inline-start: 1rem;
+      color: var(--ui-foreground-muted);
+    }
+  }
+}
