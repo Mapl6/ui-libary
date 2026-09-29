@@ -39,6 +39,7 @@ The guides in [`docs/`](docs) are also published in the showcase under **Guides*
 2. [Adding a component](docs/02-adding-a-component.md)
 3. [Theming and tokens](docs/03-theming-and-tokens.md)
 4. [Documentation workflow](docs/04-documentation-workflow.md), covering Storybook and Docmost
+5. [Roadmap](docs/05-roadmap.md): what to build next, by phase and priority
 
 ## Configuration
 
