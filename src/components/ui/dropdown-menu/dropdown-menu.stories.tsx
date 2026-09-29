@@ -49,7 +49,9 @@ export const KeyboardInteraction: Story = {
     const trigger = canvas.getByRole("button", { name: "Options" })
     trigger.focus()
     await userEvent.keyboard("{ArrowDown}")
-    await waitFor(() => expect(canvas.getByRole("menuitem", { name: "Rename" })).toHaveFocus())
+    await waitFor(() =>
+      expect(canvas.getByRole("menuitem", { name: "Rename" })).toHaveFocus()
+    )
     // Disabled items are skipped.
     await userEvent.keyboard("{ArrowDown}")
     await expect(canvas.getByRole("menuitem", { name: "Duplicate" })).toHaveFocus()

@@ -1,6 +1,14 @@
 "use client"
 
-import { ExternalLink, Monitor, RotateCw, Smartphone, SlidersHorizontal, Tablet, Wind } from "lucide-react"
+import {
+  ExternalLink,
+  Monitor,
+  RotateCw,
+  Smartphone,
+  SlidersHorizontal,
+  Tablet,
+  Wind,
+} from "lucide-react"
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react"
 
 import { Tooltip } from "@/components/ui/tooltip"
@@ -26,7 +34,13 @@ const MIN_HEIGHT = 280
  * Renders the component in an isolated iframe (`/preview/[slug]`), so viewport sizes
  * trigger real media queries and page styles can't leak in.
  */
-export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: PreviewFrameProps) {
+export function PreviewFrame({
+  slug,
+  title,
+  args,
+  onUpdate,
+  toolbarEnd,
+}: PreviewFrameProps) {
   const t = useT()
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [ready, setReady] = useState(false)
@@ -42,11 +56,16 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin || event.source !== frameRef.current?.contentWindow) return
+      if (
+        event.origin !== window.location.origin ||
+        event.source !== frameRef.current?.contentWindow
+      )
+        return
       if (!isMessage<FrameMessage>(event.data)) return
       const message = event.data
       if (message.type === "ready") setReady(true)
-      else if (message.type === "resize") setContentHeight(Math.max(MIN_HEIGHT, Math.ceil(message.height)))
+      else if (message.type === "resize")
+        setContentHeight(Math.max(MIN_HEIGHT, Math.ceil(message.height)))
       else if (message.type === "update") onUpdate(message.patch)
     }
     window.addEventListener("message", onMessage)
@@ -61,7 +80,8 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
     if (ready) post({ source: "ui-library", type: "env", reducedMotion })
   }, [ready, reducedMotion, post])
 
-  const preset = viewport === "custom" ? { ...custom, id: "custom" as const } : viewports[viewport]
+  const preset =
+    viewport === "custom" ? { ...custom, id: "custom" as const } : viewports[viewport]
   const width = preset.width && preset.height && rotated ? preset.height : preset.width
   const height = preset.width && preset.height && rotated ? preset.width : preset.height
   const frameHeight = height ?? contentHeight
@@ -77,8 +97,12 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
 
   return (
     <div className="flex min-w-0 flex-col overflow-hidden rounded-lg border bg-surface">
-      <div className="scrollbar-thin flex h-10 shrink-0 items-center gap-1 overflow-x-auto border-b px-1.5">
-        <div role="radiogroup" aria-label="Viewport" className="flex shrink-0 items-center gap-0.5">
+      <div className="flex h-10 shrink-0 scrollbar-thin items-center gap-1 overflow-x-auto border-b px-1.5">
+        <div
+          role="radiogroup"
+          aria-label="Viewport"
+          className="flex shrink-0 items-center gap-0.5"
+        >
           {options.map((option) => (
             <Tooltip key={option.id} content={option.label} side="bottom">
               <button
@@ -101,14 +125,19 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
         <div className="mx-1 h-4 w-px shrink-0 bg-border" />
 
         {viewport === "custom" ? (
-          <div dir="ltr" className="flex shrink-0 items-center gap-1 font-mono text-xs text-foreground-muted">
+          <div
+            dir="ltr"
+            className="flex shrink-0 items-center gap-1 font-mono text-xs text-foreground-muted"
+          >
             <input
               type="number"
               aria-label={t("viewport.width")}
               min={240}
               max={2560}
               value={custom.width}
-              onChange={(e) => setCustom((c) => ({ ...c, width: Number(e.target.value) || c.width }))}
+              onChange={(e) =>
+                setCustom((c) => ({ ...c, width: Number(e.target.value) || c.width }))
+              }
               className="h-6 w-16 rounded-sm border bg-surface px-1.5 text-foreground"
             />
             ×
@@ -118,19 +147,28 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
               min={200}
               max={2560}
               value={custom.height}
-              onChange={(e) => setCustom((c) => ({ ...c, height: Number(e.target.value) || c.height }))}
+              onChange={(e) =>
+                setCustom((c) => ({ ...c, height: Number(e.target.value) || c.height }))
+              }
               className="h-6 w-16 rounded-sm border bg-surface px-1.5 text-foreground"
             />
           </div>
         ) : (
-          <span dir="ltr" className="shrink-0 font-mono text-xs text-foreground-subtle tabular-nums">
+          <span
+            dir="ltr"
+            className="shrink-0 font-mono text-xs text-foreground-subtle tabular-nums"
+          >
             {width ? `${width} × ${height}` : "100%"}
           </span>
         )}
 
         <div className="ms-auto flex shrink-0 items-center gap-0.5">
           {width && (
-            <ToolbarButton label={t("viewport.rotate")} onClick={() => setRotated((r) => !r)} pressed={rotated}>
+            <ToolbarButton
+              label={t("viewport.rotate")}
+              onClick={() => setRotated((r) => !r)}
+              pressed={rotated}
+            >
               <RotateCw />
             </ToolbarButton>
           )}
@@ -156,7 +194,12 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
         </div>
       </div>
 
-      <div className={cn("scrollbar-thin canvas-grid relative overflow-auto", width && "p-4 sm:p-6")}>
+      <div
+        className={cn(
+          "relative scrollbar-thin overflow-auto canvas-grid",
+          width && "p-4 sm:p-6"
+        )}
+      >
         <iframe
           ref={frameRef}
           src={`/preview/${slug}`}
@@ -167,7 +210,11 @@ export function PreviewFrame({ slug, title, args, onUpdate, toolbarEnd }: Previe
             width && "rounded-lg border bg-background shadow-md",
             !ready && "opacity-0"
           )}
-          style={{ width: width ? `${width}px` : "100%", height: `${frameHeight}px`, maxWidth: width ? "none" : "100%" }}
+          style={{
+            width: width ? `${width}px` : "100%",
+            height: `${frameHeight}px`,
+            maxWidth: width ? "none" : "100%",
+          }}
         />
       </div>
     </div>

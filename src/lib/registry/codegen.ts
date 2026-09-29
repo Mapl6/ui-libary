@@ -33,22 +33,30 @@ export function toLiteral(value: unknown): string {
     if (value.length === 0) return "[]"
     const items = value.map(toLiteral)
     const inline = `[${items.join(", ")}]`
-    return inline.length <= 60 ? inline : `[\n${items.map((i) => indent(i)).join(",\n")},\n]`
+    return inline.length <= 60
+      ? inline
+      : `[\n${items.map((i) => indent(i)).join(",\n")},\n]`
   }
   if (typeof value === "object") {
     const entries = Object.entries(value).filter(([, v]) => v !== undefined)
     if (entries.length === 0) return "{}"
-    const parts = entries.map(([k, v]) => `${isIdentifier(k) ? k : quote(k)}: ${toLiteral(v)}`)
+    const parts = entries.map(
+      ([k, v]) => `${isIdentifier(k) ? k : quote(k)}: ${toLiteral(v)}`
+    )
     const inline = `{ ${parts.join(", ")} }`
-    return inline.length <= 60 ? inline : `{\n${parts.map((p) => indent(p)).join(",\n")},\n}`
+    return inline.length <= 60
+      ? inline
+      : `{\n${parts.map((p) => indent(p)).join(",\n")},\n}`
   }
   return "undefined"
 }
 
 function formatProp(name: string, value: unknown): string | null {
-  if (value === undefined || value === null || value === "" || value === false) return null
+  if (value === undefined || value === null || value === "" || value === false)
+    return null
   if (value === true) return name
-  if (typeof value === "string" && !/["\\\n{}]/.test(value)) return `${name}=${quote(value)}`
+  if (typeof value === "string" && !/["\\\n{}]/.test(value))
+    return `${name}=${quote(value)}`
   return `${name}={${toLiteral(value)}}`
 }
 
@@ -73,9 +81,16 @@ export function generateJsx({ component, importPath, args, props }: JsxOptions) 
     .map(([name, value]) => formatProp(name, value))
     .filter((line): line is string => line !== null)
 
-  const multiline = attributes.some((a) => a.includes("\n")) || attributes.join(" ").length + component.length > 56
-  const attrs = multiline ? `\n${attributes.map((a) => indent(a)).join("\n")}\n` : attributes.length ? ` ${attributes.join(" ")}` : ""
-  const text = typeof children === "string" || typeof children === "number" ? String(children) : ""
+  const multiline =
+    attributes.some((a) => a.includes("\n")) ||
+    attributes.join(" ").length + component.length > 56
+  const attrs = multiline
+    ? `\n${attributes.map((a) => indent(a)).join("\n")}\n`
+    : attributes.length
+      ? ` ${attributes.join(" ")}`
+      : ""
+  const text =
+    typeof children === "string" || typeof children === "number" ? String(children) : ""
 
   const element = text
     ? `<${component}${attrs}>\n${indent(text)}\n</${component}>`

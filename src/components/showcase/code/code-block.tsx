@@ -17,10 +17,25 @@ type CodeBlockProps = {
   className?: string
 }
 
-const HIGHLIGHTED = new Set(["tsx", "ts", "jsx", "js", "typescript", "javascript", "json", "css"])
+const HIGHLIGHTED = new Set([
+  "tsx",
+  "ts",
+  "jsx",
+  "js",
+  "typescript",
+  "javascript",
+  "json",
+  "css",
+])
 
 /** Syntax-highlighted code with copy and expand/collapse. Always LTR. */
-export function CodeBlock({ code, language = "tsx", title, collapseAfter = 24, className }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  language = "tsx",
+  title,
+  collapseAfter = 24,
+  className,
+}: CodeBlockProps) {
   const t = useT()
   const [copied, setCopied] = useState(false)
   const [expanded, setExpanded] = useState(false)
@@ -43,9 +58,17 @@ export function CodeBlock({ code, language = "tsx", title, collapseAfter = 24, c
   }
 
   return (
-    <div dir="ltr" className={cn("group/code relative overflow-hidden rounded-lg border bg-surface-muted", className)}>
+    <div
+      dir="ltr"
+      className={cn(
+        "group/code relative overflow-hidden rounded-lg border bg-surface-muted",
+        className
+      )}
+    >
       <div className="flex h-9 items-center justify-between gap-3 border-b ps-3 pe-1.5">
-        <span className="truncate font-mono text-xs text-foreground-muted">{title ?? language}</span>
+        <span className="truncate font-mono text-xs text-foreground-muted">
+          {title ?? language}
+        </span>
         <button
           type="button"
           onClick={copy}
@@ -55,7 +78,19 @@ export function CodeBlock({ code, language = "tsx", title, collapseAfter = 24, c
           <span aria-live="polite">{copied ? t("code.copied") : t("code.copy")}</span>
         </button>
       </div>
-      <div className={cn("relative", collapsible && !expanded && "max-h-[calc(var(--collapsed-lines)*1.375rem+1.5rem)] overflow-hidden")} style={collapsible ? ({ "--collapsed-lines": collapseAfter } as CSSProperties) : undefined}>
+      <div
+        className={cn(
+          "relative",
+          collapsible &&
+            !expanded &&
+            "max-h-[calc(var(--collapsed-lines)*1.375rem+1.5rem)] overflow-hidden"
+        )}
+        style={
+          collapsible
+            ? ({ "--collapsed-lines": collapseAfter } as CSSProperties)
+            : undefined
+        }
+      >
         <pre className="scrollbar-thin overflow-x-auto p-3 text-[0.8125rem] leading-[1.375rem]">
           <code className="code-highlight" dangerouslySetInnerHTML={{ __html: html }} />
         </pre>

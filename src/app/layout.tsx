@@ -11,7 +11,8 @@ const vazirmatn = Vazirmatn({ variable: "--font-vazirmatn", subsets: ["arabic"] 
 
 export const metadata: Metadata = {
   title: { default: "UI Library", template: "%s · UI Library" },
-  description: "Component library, interactive playground and design-system documentation.",
+  description:
+    "Component library, interactive playground and design-system documentation.",
 }
 
 export const viewport: Viewport = {
@@ -28,7 +29,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: preferencesScript }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${vazirmatn.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${vazirmatn.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

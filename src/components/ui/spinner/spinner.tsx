@@ -31,7 +31,13 @@ const sizes: Record<SpinnerSize, string> = {
 }
 
 /** An indeterminate loading indicator. */
-export function Spinner({ size = "md", label = "Loading", decorative = false, className, ...props }: SpinnerProps) {
+export function Spinner({
+  size = "md",
+  label = "Loading",
+  decorative = false,
+  className,
+  ...props
+}: SpinnerProps) {
   return (
     <span
       role={decorative ? undefined : "status"}

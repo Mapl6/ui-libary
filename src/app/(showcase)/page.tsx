@@ -29,8 +29,8 @@ export default async function OverviewPage() {
           <T k="app.name" />
         </h1>
         <p className="max-w-2xl text-lg text-foreground-muted">
-          One component source of truth, with an interactive playground, Storybook, generated API docs and design-token
-          documentation built on it.
+          One component source of truth, with an interactive playground, Storybook,
+          generated API docs and design-token documentation built on it.
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           <Link
@@ -70,7 +70,10 @@ export default async function OverviewPage() {
               <Card interactive className="h-full">
                 <CardHeader className="pb-4">
                   <CardTitle>
-                    <Link href={`/foundations/${f.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
+                    <Link
+                      href={`/foundations/${f.slug}`}
+                      className="after:absolute after:inset-0 focus-visible:outline-none"
+                    >
                       {f.name}
                     </Link>
                   </CardTitle>
@@ -83,15 +86,25 @@ export default async function OverviewPage() {
       </section>
 
       {categories.map((category) => (
-        <section key={category.id} className="flex flex-col gap-4" aria-labelledby={`cat-${category.id}`}>
+        <section
+          key={category.id}
+          className="flex flex-col gap-4"
+          aria-labelledby={`cat-${category.id}`}
+        >
           <div className="flex items-baseline justify-between gap-4">
             <div>
-              <h2 id={`cat-${category.id}`} className="text-xl font-semibold tracking-tight">
+              <h2
+                id={`cat-${category.id}`}
+                className="text-xl font-semibold tracking-tight"
+              >
                 {category.label}
               </h2>
               <p className="text-sm text-foreground-muted">{category.description}</p>
             </div>
-            <Link href={`/categories/${category.id}`} className="shrink-0 text-sm text-primary hover:underline">
+            <Link
+              href={`/categories/${category.id}`}
+              className="shrink-0 text-sm text-primary hover:underline"
+            >
               View all
             </Link>
           </div>
@@ -101,14 +114,25 @@ export default async function OverviewPage() {
                 <Card interactive className="h-full">
                   <CardHeader
                     className="pb-4"
-                    action={c.status !== "stable" ? <Badge size="sm" tone="warning">{c.status}</Badge> : undefined}
+                    action={
+                      c.status !== "stable" ? (
+                        <Badge size="sm" tone="warning">
+                          {c.status}
+                        </Badge>
+                      ) : undefined
+                    }
                   >
                     <CardTitle>
-                      <Link href={c.href} className="after:absolute after:inset-0 focus-visible:outline-none">
+                      <Link
+                        href={c.href}
+                        className="after:absolute after:inset-0 focus-visible:outline-none"
+                      >
                         {c.name}
                       </Link>
                     </CardTitle>
-                    <CardDescription className="line-clamp-2">{c.description}</CardDescription>
+                    <CardDescription className="line-clamp-2">
+                      {c.description}
+                    </CardDescription>
                   </CardHeader>
                 </Card>
               </li>
@@ -124,12 +148,22 @@ export default async function OverviewPage() {
         <ul className="divide-y rounded-lg border">
           {guides.map((g) => (
             <li key={g.slug}>
-              <Link href={`/guides/${g.slug}`} className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-surface-muted">
+              <Link
+                href={`/guides/${g.slug}`}
+                className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-surface-muted"
+              >
                 <span>
                   <span className="font-medium">{g.title}</span>
-                  {g.description && <span className="line-clamp-1 text-sm text-foreground-muted">{g.description}</span>}
+                  {g.description && (
+                    <span className="line-clamp-1 text-sm text-foreground-muted">
+                      {g.description}
+                    </span>
+                  )}
                 </span>
-                <ArrowRight aria-hidden className="size-4 shrink-0 text-foreground-subtle rtl:rotate-180" />
+                <ArrowRight
+                  aria-hidden
+                  className="size-4 shrink-0 text-foreground-subtle rtl:rotate-180"
+                />
               </Link>
             </li>
           ))}

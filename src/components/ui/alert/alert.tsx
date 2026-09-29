@@ -31,9 +31,12 @@ export type AlertProps = Omit<ComponentProps<"div">, "title"> & {
 const tones: Record<AlertTone, string> = {
   neutral: "bg-surface-muted text-foreground [--alert-icon:var(--ui-foreground-muted)]",
   info: "border-info/25 bg-info-subtle text-info-subtle-foreground [--alert-icon:var(--ui-info)]",
-  success: "border-success/25 bg-success-subtle text-success-subtle-foreground [--alert-icon:var(--ui-success)]",
-  warning: "border-warning/35 bg-warning-subtle text-warning-subtle-foreground [--alert-icon:var(--ui-warning)]",
-  danger: "border-danger/25 bg-danger-subtle text-danger-subtle-foreground [--alert-icon:var(--ui-danger)]",
+  success:
+    "border-success/25 bg-success-subtle text-success-subtle-foreground [--alert-icon:var(--ui-success)]",
+  warning:
+    "border-warning/35 bg-warning-subtle text-warning-subtle-foreground [--alert-icon:var(--ui-warning)]",
+  danger:
+    "border-danger/25 bg-danger-subtle text-danger-subtle-foreground [--alert-icon:var(--ui-danger)]",
 }
 
 const icons: Record<AlertTone, ReactNode> = {
@@ -63,11 +66,18 @@ export function Alert({
   return (
     <div
       role={role ?? (urgent ? "alert" : "status")}
-      className={cn("relative flex gap-3 rounded-lg border p-3 text-base", tones[tone], className)}
+      className={cn(
+        "relative flex gap-3 rounded-lg border p-3 text-base",
+        tones[tone],
+        className
+      )}
       {...props}
     >
       {shownIcon && (
-        <span aria-hidden className="mt-0.5 flex shrink-0 text-(--alert-icon) [&_svg]:size-4">
+        <span
+          aria-hidden
+          className="mt-0.5 flex shrink-0 text-(--alert-icon) [&_svg]:size-4"
+        >
           {shownIcon}
         </span>
       )}

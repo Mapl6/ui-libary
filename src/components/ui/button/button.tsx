@@ -1,9 +1,12 @@
+"use client"
+
 import { type ComponentProps, type MouseEvent, type ReactNode } from "react"
 
 import { Spinner } from "@/components/ui/spinner"
 import { cn } from "@/lib/utils/cn"
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger" | "link"
+export type ButtonVariant =
+  "primary" | "secondary" | "outline" | "ghost" | "danger" | "link"
 export type ButtonSize = "sm" | "md" | "lg"
 
 export type ButtonProps = ComponentProps<"button"> & {
@@ -48,7 +51,8 @@ export type ButtonProps = ComponentProps<"button"> & {
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-primary text-primary-foreground shadow-xs hover:bg-primary-hover",
   secondary: "bg-neutral-subtle text-foreground hover:bg-border",
-  outline: "border border-border-strong bg-surface text-foreground shadow-xs hover:bg-surface-muted",
+  outline:
+    "border border-border-strong bg-surface text-foreground shadow-xs hover:bg-surface-muted",
   ghost: "text-foreground hover:bg-neutral-subtle",
   danger: "bg-danger text-danger-foreground shadow-xs hover:bg-danger-hover",
   link: "h-auto! px-0! text-primary underline-offset-4 hover:underline",
@@ -110,7 +114,9 @@ export function Button({
       )}
       {...props}
     >
-      <span className={cn("inline-flex items-center gap-[inherit]", loading && "invisible")}>
+      <span
+        className={cn("inline-flex items-center gap-[inherit]", loading && "invisible")}
+      >
         {startIcon}
         {children}
         {endIcon}

@@ -4,7 +4,8 @@ import { Switch } from "./switch"
 
 export default defineShowcase({
   name: "Switch",
-  description: "An on/off toggle for settings that apply immediately, built on a native checkbox with role=\"switch\".",
+  description:
+    'An on/off toggle for settings that apply immediately, built on a native checkbox with role="switch".',
   category: "forms",
   tags: ["toggle", "setting", "boolean", "on off"],
   component: Switch,
@@ -13,5 +14,7 @@ export default defineShowcase({
     label: { control: "text" },
     description: { control: "text" },
   },
-  render: (args, update) => <Switch {...args} onChange={(event) => update({ checked: event.target.checked })} />,
+  render: (args, update) => (
+    <Switch {...args} onChange={(event) => update({ checked: event.target.checked })} />
+  ),
 })

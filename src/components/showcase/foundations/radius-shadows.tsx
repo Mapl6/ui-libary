@@ -13,7 +13,10 @@ export function RadiusFoundation() {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
         {Object.entries(radius).map(([name, value]) => (
           <div key={name} className="flex flex-col items-center gap-2">
-            <div className="size-20 border-2 border-primary/60 bg-primary-subtle" style={{ borderRadius: value }} />
+            <div
+              className="size-20 border-2 border-primary/60 bg-primary-subtle"
+              style={{ borderRadius: value }}
+            />
             <TokenName>rounded-{name}</TokenName>
             <span dir="ltr" className="font-mono text-2xs text-foreground-subtle">
               {value}
@@ -34,7 +37,11 @@ export function ShadowsFoundation() {
       >
         <div className="grid grid-cols-2 gap-6 rounded-lg bg-surface-muted p-6 sm:grid-cols-3 lg:grid-cols-5">
           {Object.entries(shadows).map(([name, value]) => (
-            <div key={name} className="flex h-24 flex-col items-center justify-center gap-1 rounded-lg bg-surface-raised" style={{ boxShadow: value }}>
+            <div
+              key={name}
+              className="flex h-24 flex-col items-center justify-center gap-1 rounded-lg bg-surface-raised"
+              style={{ boxShadow: value }}
+            >
               <TokenName>shadow-{name}</TokenName>
             </div>
           ))}

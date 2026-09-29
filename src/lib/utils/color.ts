@@ -5,8 +5,12 @@
 
 type Rgb = [number, number, number]
 
-export function parseOklch(value: string): { l: number; c: number; h: number; alpha: number } | null {
-  const match = value.match(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*(?:\/\s*([\d.]+))?\s*\)/)
+export function parseOklch(
+  value: string
+): { l: number; c: number; h: number; alpha: number } | null {
+  const match = value.match(
+    /oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*(?:\/\s*([\d.]+))?\s*\)/
+  )
   if (!match) return null
   return {
     l: Number(match[1]),

@@ -4,7 +4,8 @@ import { Checkbox } from "./checkbox"
 
 export default defineShowcase({
   name: "Checkbox",
-  description: "A native checkbox with a custom visual, label, description and indeterminate state.",
+  description:
+    "A native checkbox with a custom visual, label, description and indeterminate state.",
   category: "forms",
   tags: ["check", "toggle", "boolean", "agree", "multi select"],
   component: Checkbox,
@@ -18,6 +19,11 @@ export default defineShowcase({
     description: { control: "text" },
   },
   render: (args, update) => (
-    <Checkbox {...args} onChange={(event) => update({ checked: event.target.checked, indeterminate: false })} />
+    <Checkbox
+      {...args}
+      onChange={(event) =>
+        update({ checked: event.target.checked, indeterminate: false })
+      }
+    />
   ),
 })

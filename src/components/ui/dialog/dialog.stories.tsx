@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import { expect, waitFor } from "storybook/test"
+import { expect, waitFor, within } from "storybook/test"
 
 import { Button } from "@/components/ui/button"
 
@@ -39,7 +39,7 @@ export const Confirm: Story = { render: () => <ConfirmExample /> }
 
 export const Sheets: Story = { render: () => <SheetsExample /> }
 
-export const OpensAndClosesWithKeyboard: Story = {
+export const OpensClosesAndRestoresFocus: Story = {
   play: async ({ canvas, userEvent }) => {
     const trigger = canvas.getByRole("button", { name: "Open" })
     await userEvent.click(trigger)
@@ -47,7 +47,18 @@ export const OpensAndClosesWithKeyboard: Story = {
     const dialog = await canvas.findByRole("dialog", { name: "Dialog title" })
     await expect(dialog).toHaveAttribute("open")
     await expect(dialog).toHaveAccessibleDescription("A short description.")
-    await userEvent.keyboard("{Escape}")
+
+    // Both the corner button and the footer button are named "Close"; use the footer one.
+    const [, footerClose] = within(dialog).getAllByRole("button", { name: "Close" })
+    await userEvent.click(footerClose!)
+    await waitFor(() => expect(dialog).not.toHaveAttribute("open"))
+    await waitFor(() => expect(trigger).toHaveFocus())
+
+    // Browsers only fire `cancel` for trusted Escape presses, which userEvent can't produce,
+    // so dispatch the event Escape would cause and check it closes the dialog.
+    await userEvent.click(trigger)
+    await waitFor(() => expect(dialog).toHaveAttribute("open"))
+    dialog.dispatchEvent(new Event("cancel", { cancelable: true }))
     await waitFor(() => expect(dialog).not.toHaveAttribute("open"))
     await waitFor(() => expect(trigger).toHaveFocus())
   },

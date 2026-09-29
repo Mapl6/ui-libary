@@ -1,16 +1,24 @@
 ## Anatomy
 
 ```tsx
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
-<Dialog>
+;<Dialog>
   <DialogTrigger>
     <Button>Edit profile</Button>
   </DialogTrigger>
   <DialogContent title="Edit profile" description="Changes are visible to your team.">
     …form…
     <DialogFooter>
-      <DialogClose><Button variant="ghost">Cancel</Button></DialogClose>
+      <DialogClose>
+        <Button variant="ghost">Cancel</Button>
+      </DialogClose>
       <Button type="submit">Save</Button>
     </DialogFooter>
   </DialogContent>

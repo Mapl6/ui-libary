@@ -47,12 +47,16 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "flex h-7 items-center justify-between gap-2 rounded-md px-2 text-foreground-muted transition-colors hover:bg-neutral-subtle/60 hover:text-foreground",
-                      active && "bg-neutral-subtle font-medium text-foreground hover:bg-neutral-subtle"
+                      active &&
+                        "bg-neutral-subtle font-medium text-foreground hover:bg-neutral-subtle"
                     )}
                   >
                     <span className="truncate">{item.label}</span>
                     {item.status && item.status !== "stable" && (
-                      <Badge size="sm" tone={item.status === "deprecated" ? "danger" : "warning"}>
+                      <Badge
+                        size="sm"
+                        tone={item.status === "deprecated" ? "danger" : "warning"}
+                      >
                         {item.status}
                       </Badge>
                     )}

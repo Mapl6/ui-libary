@@ -8,7 +8,9 @@ export function loadMeta(slug: string): Promise<AnyShowcaseMeta> {
   let promise = cache.get(slug)
   if (!promise) {
     const loader = metaLoaders[slug]
-    promise = loader ? loader() : Promise.reject(new Error(`No showcase meta registered for "${slug}"`))
+    promise = loader
+      ? loader()
+      : Promise.reject(new Error(`No showcase meta registered for "${slug}"`))
     cache.set(slug, promise)
   }
   return promise

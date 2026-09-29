@@ -22,13 +22,20 @@ export function generateStaticParams() {
   return getAllComponents().map((c) => ({ slug: c.slug }))
 }
 
-export async function generateMetadata({ params }: PageProps<"/components/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/components/[slug]">): Promise<Metadata> {
   const { slug } = await params
   const entry = getComponent(slug)
   return entry ? { title: entry.meta.name, description: entry.meta.description } : {}
 }
 
-const statusTone = { stable: "success", beta: "info", experimental: "warning", deprecated: "danger" } as const
+const statusTone = {
+  stable: "success",
+  beta: "info",
+  experimental: "warning",
+  deprecated: "danger",
+} as const
 
 const linkClass =
   "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-sm text-foreground-muted shadow-xs transition-colors hover:bg-surface-muted hover:text-foreground [&_svg]:size-3.5"
@@ -44,8 +51,15 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
   const importPath = meta.importPath ?? `@/components/ui/${slug}`
 
   const [examples, sources, docs] = await Promise.all([
-    Promise.all(entry.examples.map(async (ex) => ({ ...ex, code: stripLeadingDocComment(await readRepoFile(ex.file)) }))),
-    Promise.all(entry.sourceFiles.map(async (file) => ({ file, code: await readRepoFile(file) }))),
+    Promise.all(
+      entry.examples.map(async (ex) => ({
+        ...ex,
+        code: stripLeadingDocComment(await readRepoFile(ex.file)),
+      }))
+    ),
+    Promise.all(
+      entry.sourceFiles.map(async (file) => ({ file, code: await readRepoFile(file) }))
+    ),
     entry.docsFile ? readRepoFile(entry.docsFile) : Promise.resolve(null),
   ])
 
@@ -55,7 +69,9 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
     storybookUrl && entry.storyFile && category
       ? `${storybookUrl}/?path=/docs/${toStoryId(`${category.label}/${meta.name}`)}--docs`
       : null
-  const docmostLink = docmostUrl ? `${docmostUrl.replace(/\/$/, "")}${meta.docmostPath ?? ""}` : null
+  const docmostLink = docmostUrl
+    ? `${docmostUrl.replace(/\/$/, "")}${meta.docmostPath ?? ""}`
+    : null
   const { previous, next } = getSiblings(slug)
 
   return (
@@ -63,8 +79,16 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       <PageHeader
         title={meta.name}
         description={meta.description}
-        breadcrumb={category ? { href: `/categories/${category.id}`, label: category.label } : undefined}
-        badges={<Badge tone={statusTone[status]} dot>{status}</Badge>}
+        breadcrumb={
+          category
+            ? { href: `/categories/${category.id}`, label: category.label }
+            : undefined
+        }
+        badges={
+          <Badge tone={statusTone[status]} dot>
+            {status}
+          </Badge>
+        }
         actions={
           <>
             {storyLink && (
@@ -73,7 +97,12 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
               </a>
             )}
             {docmostLink && (
-              <a href={docmostLink} target="_blank" rel="noreferrer" className={linkClass}>
+              <a
+                href={docmostLink}
+                target="_blank"
+                rel="noreferrer"
+                className={linkClass}
+              >
                 <ExternalLink /> <T k="links.docmost" />
               </a>
             )}
@@ -95,7 +124,14 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
                   <T k="playground.examples" />
                 </h2>
                 {examples.map((ex) => (
-                  <ExampleCard key={ex.id} id={ex.id} title={ex.title} description={ex.description} code={ex.code} Component={ex.Component} />
+                  <ExampleCard
+                    key={ex.id}
+                    id={ex.id}
+                    title={ex.title}
+                    description={ex.description}
+                    code={ex.code}
+                    Component={ex.Component}
+                  />
                 ))}
               </div>
             ) : null,
@@ -114,7 +150,12 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
           source: (
             <div className="flex flex-col gap-4">
               {sources.map((source) => (
-                <CodeBlock key={source.file} code={source.code} title={source.file} collapseAfter={40} />
+                <CodeBlock
+                  key={source.file}
+                  code={source.code}
+                  title={source.file}
+                  collapseAfter={40}
+                />
               ))}
             </div>
           ),
@@ -122,7 +163,9 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             <Markdown source={docs} />
           ) : (
             <p className="text-foreground-muted">
-              No documentation yet. Add <code className="font-mono text-sm">{slug}.docs.md</code> next to the component.
+              No documentation yet. Add{" "}
+              <code className="font-mono text-sm">{slug}.docs.md</code> next to the
+              component.
             </p>
           ),
         }}

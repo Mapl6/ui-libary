@@ -10,7 +10,13 @@ type PageHeaderProps = {
   actions?: ReactNode
 }
 
-export function PageHeader({ title, description, breadcrumb, badges, actions }: PageHeaderProps) {
+export function PageHeader({
+  title,
+  description,
+  breadcrumb,
+  badges,
+  actions,
+}: PageHeaderProps) {
   return (
     <header className="flex flex-col gap-3">
       {breadcrumb && (
@@ -36,9 +42,13 @@ export function PageHeader({ title, description, breadcrumb, badges, actions }: 
             <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
             {badges}
           </div>
-          {description && <p className="max-w-3xl text-md text-foreground-muted">{description}</p>}
+          {description && (
+            <p className="max-w-3xl text-md text-foreground-muted">{description}</p>
+          )}
         </div>
-        {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
+        {actions && (
+          <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>
+        )}
       </div>
     </header>
   )

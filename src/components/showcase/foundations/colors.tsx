@@ -6,14 +6,35 @@ import { themes } from "@/tokens/themes"
 import { FoundationSection, TokenName } from "./section"
 
 const groups: { title: string; roles: SemanticColorRole[] }[] = [
-  { title: "Surfaces", roles: ["background", "surface", "surface-muted", "surface-raised", "overlay"] },
+  {
+    title: "Surfaces",
+    roles: ["background", "surface", "surface-muted", "surface-raised", "overlay"],
+  },
   { title: "Text", roles: ["foreground", "foreground-muted", "foreground-subtle"] },
   { title: "Borders & focus", roles: ["border", "border-strong", "ring"] },
-  { title: "Primary", roles: ["primary", "primary-hover", "primary-foreground", "primary-subtle", "primary-subtle-foreground"] },
+  {
+    title: "Primary",
+    roles: [
+      "primary",
+      "primary-hover",
+      "primary-foreground",
+      "primary-subtle",
+      "primary-subtle-foreground",
+    ],
+  },
   { title: "Neutral", roles: ["neutral-subtle", "neutral-subtle-foreground"] },
   {
     title: "Status",
-    roles: ["success", "success-subtle", "warning", "warning-subtle", "danger", "danger-subtle", "info", "info-subtle"],
+    roles: [
+      "success",
+      "success-subtle",
+      "warning",
+      "warning-subtle",
+      "danger",
+      "danger-subtle",
+      "info",
+      "info-subtle",
+    ],
   },
 ]
 
@@ -41,14 +62,22 @@ export function ColorsFoundation() {
       >
         {groups.map((group) => (
           <div key={group.title}>
-            <h3 className="mb-2 text-sm font-medium text-foreground-muted">{group.title}</h3>
+            <h3 className="mb-2 text-sm font-medium text-foreground-muted">
+              {group.title}
+            </h3>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {group.roles.map((role) => (
                 <div key={role} className="overflow-hidden rounded-lg border">
-                  <div className="h-14 border-b" style={{ background: `var(--ui-${role})` }} />
+                  <div
+                    className="h-14 border-b"
+                    style={{ background: `var(--ui-${role})` }}
+                  />
                   <div className="flex flex-col gap-0.5 p-2">
                     <TokenName>{role}</TokenName>
-                    <span dir="ltr" className="truncate font-mono text-2xs text-foreground-subtle">
+                    <span
+                      dir="ltr"
+                      className="truncate font-mono text-2xs text-foreground-subtle"
+                    >
                       --ui-{role}
                     </span>
                   </div>
@@ -67,9 +96,15 @@ export function ColorsFoundation() {
           <table className="w-full min-w-[36rem] text-sm">
             <thead className="bg-surface-muted text-xs text-foreground-muted">
               <tr>
-                <th scope="col" className="px-3 py-2 text-start font-medium">Pair</th>
+                <th scope="col" className="px-3 py-2 text-start font-medium">
+                  Pair
+                </th>
                 {themes.map((theme) => (
-                  <th key={theme.id} scope="col" className="px-3 py-2 text-start font-medium">
+                  <th
+                    key={theme.id}
+                    scope="col"
+                    className="px-3 py-2 text-start font-medium"
+                  >
                     {theme.label}
                   </th>
                 ))}
@@ -91,17 +126,39 @@ export function ColorsFoundation() {
                           <span
                             aria-hidden
                             className="inline-flex h-6 w-9 items-center justify-center rounded-sm border text-xs font-semibold"
-                            style={{ background: theme.colors[bg], color: theme.colors[fg] }}
+                            style={{
+                              background: theme.colors[bg],
+                              color: theme.colors[fg],
+                            }}
                           >
                             Aa
                           </span>
                           {ratio === null ? (
-                            <span className="text-xs text-foreground-subtle">translucent</span>
+                            <span className="text-xs text-foreground-subtle">
+                              translucent
+                            </span>
                           ) : (
                             <>
-                              <span className="font-mono text-xs tabular-nums">{ratio.toFixed(2)}:1</span>
-                              <Badge size="sm" tone={ratio >= 4.5 ? "success" : ratio >= 3 ? "warning" : "danger"}>
-                                {ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large" : "fail"}
+                              <span className="font-mono text-xs tabular-nums">
+                                {ratio.toFixed(2)}:1
+                              </span>
+                              <Badge
+                                size="sm"
+                                tone={
+                                  ratio >= 4.5
+                                    ? "success"
+                                    : ratio >= 3
+                                      ? "warning"
+                                      : "danger"
+                                }
+                              >
+                                {ratio >= 7
+                                  ? "AAA"
+                                  : ratio >= 4.5
+                                    ? "AA"
+                                    : ratio >= 3
+                                      ? "AA large"
+                                      : "fail"}
                               </Badge>
                             </>
                           )}
@@ -126,7 +183,12 @@ export function ColorsFoundation() {
               <span className="font-mono text-xs text-foreground-muted">{name}</span>
               <div className="flex overflow-hidden rounded-md border">
                 {Object.entries(scale).map(([step, value]) => (
-                  <div key={step} className="group relative h-10 flex-1" style={{ background: value }} title={`${name}-${step}: ${value}`}>
+                  <div
+                    key={step}
+                    className="group relative h-10 flex-1"
+                    style={{ background: value }}
+                    title={`${name}-${step}: ${value}`}
+                  >
                     <span className="sr-only">
                       {name} {step}: {value}
                     </span>

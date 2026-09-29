@@ -1,6 +1,12 @@
 /** Statistic cards in a responsive grid. The whole card is clickable through a stretched link. */
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 const stats = [
   { label: "Revenue", value: "$48.2k", change: "+12%", tone: "success" as const },
@@ -13,9 +19,18 @@ export default function CardStats() {
     <div className="grid w-full gap-4 sm:grid-cols-3">
       {stats.map((stat) => (
         <Card key={stat.label} interactive>
-          <CardHeader action={<Badge tone={stat.tone} size="sm">{stat.change}</Badge>}>
+          <CardHeader
+            action={
+              <Badge tone={stat.tone} size="sm">
+                {stat.change}
+              </Badge>
+            }
+          >
             <CardDescription>
-              <a href="#" className="after:absolute after:inset-0 focus-visible:outline-none">
+              <a
+                href="#"
+                className="after:absolute after:inset-0 focus-visible:outline-none"
+              >
                 {stat.label}
               </a>
             </CardDescription>
@@ -23,7 +38,9 @@ export default function CardStats() {
               {stat.value}
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-2 text-sm text-foreground-subtle">vs. last 30 days</CardContent>
+          <CardContent className="pt-2 text-sm text-foreground-subtle">
+            vs. last 30 days
+          </CardContent>
         </Card>
       ))}
     </div>

@@ -2,11 +2,15 @@
 
 ```tsx
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-<DropdownMenu>
+;<DropdownMenu>
   <DropdownMenuTrigger>
     <Button variant="outline">Actions</Button>
   </DropdownMenuTrigger>
@@ -14,7 +18,9 @@ import {
     <DropdownMenuLabel>File</DropdownMenuLabel>
     <DropdownMenuItem onSelect={rename}>Rename</DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem tone="danger" onSelect={remove}>Delete</DropdownMenuItem>
+    <DropdownMenuItem tone="danger" onSelect={remove}>
+      Delete
+    </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 ```
@@ -23,16 +29,16 @@ Menus are for **actions**. For choosing a value in a form, use **Select**. For n
 
 ## Keyboard
 
-| Key | Action |
-| --- | --- |
-| Enter / Space / ↓ | Open and focus the first item |
-| ↑ | Open and focus the last item |
-| ↑ / ↓ | Move between items (wraps, skips disabled) |
-| Home / End | First / last item |
-| A–Z | Typeahead to the matching item |
-| Enter / Space | Select the item and close |
-| Escape | Close and return focus to the trigger |
-| Tab | Close and continue in the page |
+| Key               | Action                                     |
+| ----------------- | ------------------------------------------ |
+| Enter / Space / ↓ | Open and focus the first item              |
+| ↑                 | Open and focus the last item               |
+| ↑ / ↓             | Move between items (wraps, skips disabled) |
+| Home / End        | First / last item                          |
+| A–Z               | Typeahead to the matching item             |
+| Enter / Space     | Select the item and close                  |
+| Escape            | Close and return focus to the trigger      |
+| Tab               | Close and continue in the page             |
 
 ## Accessibility
 

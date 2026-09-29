@@ -1,9 +1,16 @@
 ## Anatomy
 
 ```tsx
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-<Card>
+;<Card>
   <CardHeader action={<Badge>New</Badge>}>
     <CardTitle>Title</CardTitle>
     <CardDescription>Description</CardDescription>
@@ -17,7 +24,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 Don't wrap a card in a `<button>` or `<a>`: that breaks nested interactive content. Instead set
 `interactive` and stretch one real link over the card with `after:absolute after:inset-0`
-(see the *Stats* example). The focus ring is drawn on the card via `:has(:focus-visible)`.
+(see the _Stats_ example). The focus ring is drawn on the card via `:has(:focus-visible)`.
 
 ## Accessibility
 

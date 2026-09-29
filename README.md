@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UI Library
 
-## Getting Started
+A React component library with its own documentation site. Each component is written once, and its showcase page, interactive playground, props table, Storybook stories and Docmost export are built from those same files.
 
-First, run the development server:
+- **Showcase**: Next.js site with a live playground in an isolated iframe (viewport presets, reduced motion), generated usage code, examples, props tables from TypeScript, source and docs. It supports light and dark themes, RTL, English and Persian, and ⌘K search.
+- **Components**: Alert, Badge, Button, Card, Checkbox, Dialog, Dropdown Menu, Input, Select, Skeleton, Spinner, Switch, Tabs, Textarea, Tooltip. They are accessible and use native elements where possible (`<dialog>`, `<select>`).
+- **Design tokens**: authored in TypeScript, generated into CSS variables and a Tailwind v4 `@theme`.
+- **Storybook 10**: every story runs as a test in headless Chromium through Vitest.
+- **Docmost**: optional self-hosted wiki for reviewing and discussing the docs.
+
+## Quick start
+
+Requires Node.js 22.18 or newer.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev            # http://localhost:3000
+npm run storybook      # http://localhost:6006
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script                                        | Description                                                                 |
+| --------------------------------------------- | --------------------------------------------------------------------------- |
+| `npm run dev`                                 | Generator in watch mode, plus the Next.js dev server                        |
+| `npm run build` / `start`                     | Production build of the showcase                                            |
+| `npm run generate`                            | Regenerate token CSS and the component registry                             |
+| `npm run check`                               | Generate, lint, typecheck and format check                                  |
+| `npm test`                                    | Run all stories as tests (run `npx playwright install chromium` once first) |
+| `npm run storybook` / `build-storybook`       | Storybook dev server / static build                                         |
+| `npm run docs:up` / `docs:down` / `docs:logs` | Local Docmost with Docker                                                   |
+| `npm run docs:export`                         | Export all docs as Markdown and a zip for Docmost's import                  |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Documentation
 
-## Learn More
+The guides in [`docs/`](docs) are also published in the showcase under **Guides**:
 
-To learn more about Next.js, take a look at the following resources:
+1. [Getting started](docs/01-getting-started.md)
+2. [Adding a component](docs/02-adding-a-component.md)
+3. [Theming and tokens](docs/03-theming-and-tokens.md)
+4. [Documentation workflow](docs/04-documentation-workflow.md), covering Storybook and Docmost
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copy `.env.example` to `.env.local` to link the showcase to Storybook and Docmost. Both variables are optional.

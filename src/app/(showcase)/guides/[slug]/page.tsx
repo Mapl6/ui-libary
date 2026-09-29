@@ -10,7 +10,9 @@ export async function generateStaticParams() {
   return (await getGuides()).map((g) => ({ slug: g.slug }))
 }
 
-export async function generateMetadata({ params }: PageProps<"/guides/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/guides/[slug]">): Promise<Metadata> {
   const { slug } = await params
   const guide = await getGuide(slug)
   return guide ? { title: guide.title, description: guide.description } : {}
@@ -31,7 +33,12 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
           Source: <code className="font-mono">{guide.file}</code>
         </span>
         {docmostUrl && (
-          <a href={docmostUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+          <a
+            href={docmostUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary hover:underline"
+          >
             Discuss in Docmost →
           </a>
         )}

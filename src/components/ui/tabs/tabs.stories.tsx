@@ -40,7 +40,10 @@ export const KeyboardNavigation: Story = {
     const one = canvas.getByRole("tab", { name: "One" })
     await userEvent.click(one)
     await userEvent.keyboard("{ArrowRight}")
-    await expect(canvas.getByRole("tab", { name: "Two" })).toHaveAttribute("aria-selected", "true")
+    await expect(canvas.getByRole("tab", { name: "Two" })).toHaveAttribute(
+      "aria-selected",
+      "true"
+    )
     // Disabled tabs are skipped.
     await userEvent.keyboard("{ArrowRight}")
     await expect(canvas.getByRole("tab", { name: "Four" })).toHaveFocus()

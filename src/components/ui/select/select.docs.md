@@ -3,7 +3,7 @@
 ```tsx
 import { Select } from "@/components/ui/select"
 
-<Select
+;<Select
   label="Country"
   name="country"
   placeholder="Choose a country"

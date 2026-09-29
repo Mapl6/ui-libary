@@ -5,7 +5,8 @@ import { Tooltip } from "./tooltip"
 
 export default defineShowcase({
   name: "Tooltip",
-  description: "A short, non-essential label shown on hover and keyboard focus, dismissible with Escape.",
+  description:
+    "A short, non-essential label shown on hover and keyboard focus, dismissible with Escape.",
   category: "feedback",
   tags: ["hint", "title", "popover", "help", "label"],
   component: Tooltip,

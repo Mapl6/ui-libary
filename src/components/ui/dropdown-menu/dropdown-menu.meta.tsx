@@ -14,7 +14,8 @@ import {
 
 export default defineShowcase({
   name: "Dropdown Menu",
-  description: "A menu of actions opened from a button, with full keyboard support, typeahead and destructive items.",
+  description:
+    "A menu of actions opened from a button, with full keyboard support, typeahead and destructive items.",
   category: "actions",
   tags: ["menu", "actions", "context menu", "overflow", "popover", "dropdown"],
   component: DropdownMenu,

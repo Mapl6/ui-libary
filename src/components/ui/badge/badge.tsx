@@ -96,7 +96,10 @@ export function Badge({
       {dot && (
         <span
           aria-hidden
-          className={cn("size-1.5 rounded-full", appearance === "solid" ? "bg-current" : dots[tone])}
+          className={cn(
+            "size-1.5 rounded-full",
+            appearance === "solid" ? "bg-current" : dots[tone]
+          )}
         />
       )}
       {children}

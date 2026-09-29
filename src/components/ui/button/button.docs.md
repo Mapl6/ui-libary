@@ -11,7 +11,7 @@
 ```tsx
 import { Button } from "@/components/ui/button"
 
-<Button onClick={save} loading={isSaving}>
+;<Button onClick={save} loading={isSaving}>
   Save changes
 </Button>
 ```
@@ -21,6 +21,6 @@ import { Button } from "@/components/ui/button"
 - Renders a native `<button>`, with `type="button"` by default so it never submits a form by accident.
   Pass `type="submit"` explicitly inside forms.
 - `loading` sets `aria-busy` and ignores clicks but keeps the button focusable, so keyboard users don't lose focus.
-- `disabled` uses the native attribute. Prefer explaining *why* an action is unavailable.
+- `disabled` uses the native attribute. Prefer explaining _why_ an action is unavailable.
 - Icon-only buttons (`iconOnly`) must have an `aria-label`.
 - Icons placed via `startIcon`/`endIcon` follow the writing direction automatically.

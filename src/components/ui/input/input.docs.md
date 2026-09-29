@@ -3,7 +3,7 @@
 ```tsx
 import { Input } from "@/components/ui/input"
 
-<Input
+;<Input
   label="Email"
   type="email"
   name="email"

@@ -75,7 +75,9 @@ export function Textarea({
   ...props
 }: TextareaProps) {
   const field = useField({ id, description, error, invalid, describedBy })
-  const [uncontrolledLength, setUncontrolledLength] = useState(() => String(defaultValue ?? "").length)
+  const [uncontrolledLength, setUncontrolledLength] = useState(
+    () => String(defaultValue ?? "").length
+  )
   const length = value !== undefined ? String(value).length : uncontrolledLength
   const counterId = `${field.controlId}-count`
   const withCounter = showCount && maxLength !== undefined
@@ -99,7 +101,10 @@ export function Textarea({
         withCounter ? (
           <span
             id={counterId}
-            className={cn("text-xs text-foreground-subtle tabular-nums", length >= maxLength && "text-danger")}
+            className={cn(
+              "text-xs text-foreground-subtle tabular-nums",
+              length >= maxLength && "text-danger"
+            )}
           >
             {length}/{maxLength}
           </span>
@@ -108,7 +113,11 @@ export function Textarea({
     >
       <textarea
         {...field.controlProps}
-        aria-describedby={[field.controlProps["aria-describedby"], withCounter ? counterId : null].filter(Boolean).join(" ") || undefined}
+        aria-describedby={
+          [field.controlProps["aria-describedby"], withCounter ? counterId : null]
+            .filter(Boolean)
+            .join(" ") || undefined
+        }
         rows={rows}
         maxLength={maxLength}
         required={required}
@@ -116,7 +125,12 @@ export function Textarea({
         value={value}
         defaultValue={defaultValue}
         onChange={handleChange}
-        className={cn(controlBase, "min-h-16 px-2.5 py-1.5 text-base", resizes[resize], className)}
+        className={cn(
+          controlBase,
+          "min-h-16 px-2.5 py-1.5 text-base",
+          resizes[resize],
+          className
+        )}
         {...props}
       />
     </Field>

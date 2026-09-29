@@ -3,7 +3,7 @@
 ```tsx
 import { Tabs, TabsList, TabsPanel, TabsTrigger } from "@/components/ui/tabs"
 
-<Tabs defaultValue="overview">
+;<Tabs defaultValue="overview">
   <TabsList aria-label="Project">
     <TabsTrigger value="overview">Overview</TabsTrigger>
     <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -15,11 +15,11 @@ import { Tabs, TabsList, TabsPanel, TabsTrigger } from "@/components/ui/tabs"
 
 ## Keyboard
 
-| Key | Action |
-| --- | --- |
-| Tab | Moves focus into the tab list (to the selected tab), then into the panel |
-| ← / → | Previous / next tab (flipped in RTL; ↑ / ↓ when vertical) |
-| Home / End | First / last tab |
+| Key        | Action                                                                   |
+| ---------- | ------------------------------------------------------------------------ |
+| Tab        | Moves focus into the tab list (to the selected tab), then into the panel |
+| ← / →      | Previous / next tab (flipped in RTL; ↑ / ↓ when vertical)                |
+| Home / End | First / last tab                                                         |
 
 Tabs use **automatic activation**: moving focus selects the tab. Disabled tabs are skipped.
 

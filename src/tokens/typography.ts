@@ -1,6 +1,6 @@
 export const fontFamily = {
-  sans: 'var(--font-geist-sans), var(--font-vazirmatn), ui-sans-serif, system-ui, sans-serif',
-  mono: 'var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace',
+  sans: "var(--font-geist-sans), var(--font-vazirmatn), ui-sans-serif, system-ui, sans-serif",
+  mono: "var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace",
 } as const
 
 /** [font-size, line-height] */

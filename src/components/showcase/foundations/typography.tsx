@@ -13,7 +13,10 @@ export function TypographyFoundation() {
           {Object.entries(fontSize)
             .reverse()
             .map(([name, [size, lineHeight]]) => (
-              <div key={name} className="grid gap-2 p-4 sm:grid-cols-[9rem_1fr] sm:items-baseline">
+              <div
+                key={name}
+                className="grid gap-2 p-4 sm:grid-cols-[9rem_1fr] sm:items-baseline"
+              >
                 <div className="flex flex-col">
                   <TokenName>text-{name}</TokenName>
                   <span dir="ltr" className="font-mono text-2xs text-foreground-subtle">
@@ -36,7 +39,9 @@ export function TypographyFoundation() {
                 Aa
               </p>
               <TokenName>font-{name}</TokenName>
-              <span className="ms-2 font-mono text-2xs text-foreground-subtle">{weight}</span>
+              <span className="ms-2 font-mono text-2xs text-foreground-subtle">
+                {weight}
+              </span>
             </div>
           ))}
         </div>
@@ -53,14 +58,20 @@ export function TypographyFoundation() {
             <p lang="fa" dir="rtl" className="mt-2 text-xl">
               طراحی سیستم‌ها تیم‌ها را مقیاس‌پذیر می‌کند. ۱۲۳۴۵۶۷۸۹۰
             </p>
-            <p dir="ltr" className="mt-3 font-mono text-2xs break-all text-foreground-subtle">
+            <p
+              dir="ltr"
+              className="mt-3 font-mono text-2xs break-all text-foreground-subtle"
+            >
               {fontFamily.sans}
             </p>
           </div>
           <div className="rounded-lg border p-4">
             <TokenName>font-mono</TokenName>
             <p className="mt-3 font-mono text-lg">{"const answer = 42 // 0O il1"}</p>
-            <p dir="ltr" className="mt-3 font-mono text-2xs break-all text-foreground-subtle">
+            <p
+              dir="ltr"
+              className="mt-3 font-mono text-2xs break-all text-foreground-subtle"
+            >
               {fontFamily.mono}
             </p>
           </div>

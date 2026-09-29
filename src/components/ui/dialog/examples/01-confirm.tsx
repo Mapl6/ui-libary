@@ -4,7 +4,13 @@
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function DialogConfirm() {
   const [result, setResult] = useState<string | null>(null)

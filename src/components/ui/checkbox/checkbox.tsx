@@ -80,7 +80,10 @@ export function Checkbox({
       {(label || description) && (
         <div className="flex flex-col gap-0.5">
           {label && (
-            <label htmlFor={field.controlId} className="cursor-pointer text-base leading-5 text-foreground select-none">
+            <label
+              htmlFor={field.controlId}
+              className="cursor-pointer text-base leading-5 text-foreground select-none"
+            >
               {label}
             </label>
           )}

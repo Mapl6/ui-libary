@@ -175,7 +175,9 @@ export function IconsFoundation() {
                 className="flex h-20 w-full flex-col items-center justify-center gap-2 rounded-lg border text-foreground-muted transition-colors hover:border-border-strong hover:bg-surface-muted hover:text-foreground"
               >
                 <Icon aria-hidden className="size-5" />
-                <span className="max-w-full truncate px-1 text-2xs">{copied === name ? "Copied!" : name}</span>
+                <span className="max-w-full truncate px-1 text-2xs">
+                  {copied === name ? "Copied!" : name}
+                </span>
               </button>
             </li>
           )

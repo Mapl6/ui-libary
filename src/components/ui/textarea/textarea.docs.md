@@ -3,7 +3,7 @@
 ```tsx
 import { Textarea } from "@/components/ui/textarea"
 
-<Textarea label="Message" name="message" resize="auto" maxLength={500} showCount />
+;<Textarea label="Message" name="message" resize="auto" maxLength={500} showCount />
 ```
 
 - `resize="auto"` uses CSS `field-sizing: content` to grow with the text. Browsers without support fall back to manual vertical resizing.

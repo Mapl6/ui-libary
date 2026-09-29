@@ -3,7 +3,14 @@
 import { ChevronDown } from "lucide-react"
 import { type ComponentProps } from "react"
 
-import { Field, type FieldControlSize, type FieldOwnProps, controlBase, controlSizes, useField } from "@/components/ui/field"
+import {
+  Field,
+  type FieldControlSize,
+  type FieldOwnProps,
+  controlBase,
+  controlSizes,
+  useField,
+} from "@/components/ui/field"
 import { cn } from "@/lib/utils/cn"
 
 export type SelectOption = {
@@ -83,7 +90,11 @@ export function Select({
           required={required}
           disabled={disabled}
           value={value}
-          defaultValue={value === undefined ? (defaultValue ?? (placeholder ? "" : undefined)) : undefined}
+          defaultValue={
+            value === undefined
+              ? (defaultValue ?? (placeholder ? "" : undefined))
+              : undefined
+          }
           className={cn(
             controlBase,
             controlSizes[size],

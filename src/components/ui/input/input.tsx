@@ -2,7 +2,14 @@
 
 import { type ComponentProps, type ReactNode } from "react"
 
-import { Field, type FieldControlSize, type FieldOwnProps, controlBase, controlSizes, useField } from "@/components/ui/field"
+import {
+  Field,
+  type FieldControlSize,
+  type FieldOwnProps,
+  controlBase,
+  controlSizes,
+  useField,
+} from "@/components/ui/field"
 import { cn } from "@/lib/utils/cn"
 
 export type InputProps = Omit<ComponentProps<"input">, "size"> &
@@ -77,11 +84,19 @@ export function Input({
           {...field.controlProps}
           required={required}
           disabled={disabled}
-          className={cn(controlBase, controlSizes[size], startAddon && "ps-8", endAddon && "pe-9", className)}
+          className={cn(
+            controlBase,
+            controlSizes[size],
+            startAddon && "ps-8",
+            endAddon && "pe-9",
+            className
+          )}
           {...props}
         />
         {endAddon && (
-          <span className="absolute end-1.5 flex items-center text-foreground-subtle [&_svg]:size-4">{endAddon}</span>
+          <span className="absolute end-1.5 flex items-center text-foreground-subtle [&_svg]:size-4">
+            {endAddon}
+          </span>
         )}
       </div>
     </Field>

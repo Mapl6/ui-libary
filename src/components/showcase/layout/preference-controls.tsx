@@ -12,27 +12,37 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Tooltip } from "@/components/ui/tooltip"
 import { localeInfo, locales } from "@/i18n/config"
+import type { MessageKey } from "@/i18n/dictionaries"
 import type { ThemePreference } from "@/lib/preferences/store"
 import { usePreferences, useT } from "@/lib/preferences/use-preferences"
 import { themes } from "@/tokens/themes"
 
 const themeIcons: Record<string, typeof Sun> = { light: Sun, dark: Moon, system: Monitor }
 
+/** Built-in themes are translated; custom themes fall back to their own label. */
+const themeLabels: Record<string, MessageKey | undefined> = {
+  light: "prefs.theme.light",
+  dark: "prefs.theme.dark",
+}
+
 export function PreferenceControls() {
   const t = useT()
   const [prefs, setPrefs] = usePreferences()
   const ThemeIcon = themeIcons[prefs.theme] ?? Sun
   const themeOptions: { id: ThemePreference; label: string }[] = [
-    ...themes.map((theme) => ({
-      id: theme.id,
-      label: theme.id === "dark" ? t("prefs.theme.dark") : t("prefs.theme.light"),
-    })),
+    ...themes.map((theme) => {
+      const key = themeLabels[theme.id]
+      return { id: theme.id, label: key ? t(key) : theme.label }
+    }),
     { id: "system", label: t("prefs.theme.system") },
   ]
 
   return (
     <div className="flex items-center gap-0.5">
-      <Tooltip content={`${t("prefs.direction")}: ${prefs.dir.toUpperCase()}`} side="bottom">
+      <Tooltip
+        content={`${t("prefs.direction")}: ${prefs.dir.toUpperCase()}`}
+        side="bottom"
+      >
         <Button
           variant="ghost"
           size="sm"
@@ -57,7 +67,11 @@ export function PreferenceControls() {
               key={locale}
               lang={locale}
               onSelect={() => setPrefs({ locale })}
-              icon={<Check className={prefs.locale === locale ? "opacity-100" : "opacity-0"} />}
+              icon={
+                <Check
+                  className={prefs.locale === locale ? "opacity-100" : "opacity-0"}
+                />
+              }
             >
               {localeInfo[locale].nativeLabel}
             </DropdownMenuItem>
@@ -76,7 +90,11 @@ export function PreferenceControls() {
           {themeOptions.map((option) => {
             const Icon = themeIcons[option.id] ?? Sun
             return (
-              <DropdownMenuItem key={option.id} icon={<Icon />} onSelect={() => setPrefs({ theme: option.id })}>
+              <DropdownMenuItem
+                key={option.id}
+                icon={<Icon />}
+                onSelect={() => setPrefs({ theme: option.id })}
+              >
                 <span className="flex items-center justify-between gap-4">
                   {option.label}
                   {prefs.theme === option.id && <Check className="size-3.5" />}

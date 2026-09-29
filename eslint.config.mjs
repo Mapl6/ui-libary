@@ -10,7 +10,10 @@ export default defineConfig([
   {
     rules: {
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/consistent-type-imports": ["error", { fixStyle: "inline-type-imports" }],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { fixStyle: "inline-type-imports" },
+      ],
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },

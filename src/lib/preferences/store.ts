@@ -11,13 +11,21 @@ export type Preferences = {
 }
 
 export const STORAGE_KEY = "ui-library:preferences"
-export const defaultPreferences: Preferences = { theme: "system", dir: "ltr", locale: defaultLocale }
+export const defaultPreferences: Preferences = {
+  theme: "system",
+  dir: "ltr",
+  locale: defaultLocale,
+}
 
 const themeIds = new Set<string>(themes.map((t) => t.id))
 
 function sanitize(value: unknown): Preferences {
-  const input = (typeof value === "object" && value !== null ? value : {}) as Partial<Record<keyof Preferences, unknown>>
-  const locale = locales.includes(input.locale as Locale) ? (input.locale as Locale) : defaultPreferences.locale
+  const input = (typeof value === "object" && value !== null ? value : {}) as Partial<
+    Record<keyof Preferences, unknown>
+  >
+  const locale = locales.includes(input.locale as Locale)
+    ? (input.locale as Locale)
+    : defaultPreferences.locale
   return {
     theme:
       input.theme === "system" || themeIds.has(String(input.theme))
@@ -53,7 +61,10 @@ export function resolveTheme(theme: ThemePreference): ThemeId {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
 
-export function applyPreferences(prefs: Preferences, root: HTMLElement = document.documentElement) {
+export function applyPreferences(
+  prefs: Preferences,
+  root: HTMLElement = document.documentElement
+) {
   root.dataset.theme = resolveTheme(prefs.theme)
   root.dir = prefs.dir
   root.lang = prefs.locale

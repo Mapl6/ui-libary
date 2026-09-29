@@ -14,24 +14,36 @@ export function generateStaticParams() {
   return categories.map((c) => ({ category: c.id }))
 }
 
-export async function generateMetadata({ params }: PageProps<"/categories/[category]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/categories/[category]">): Promise<Metadata> {
   const { category } = await params
   return { title: getCategory(category)?.label }
 }
 
-export default async function CategoryPage({ params }: PageProps<"/categories/[category]">) {
+export default async function CategoryPage({
+  params,
+}: PageProps<"/categories/[category]">) {
   const { category: id } = await params
   const category = getCategory(id)
   if (!category) notFound()
 
   const items =
     id === "foundations"
-      ? foundations.map((f) => ({ href: `/foundations/${f.slug}`, name: f.name, description: f.description }))
+      ? foundations.map((f) => ({
+          href: `/foundations/${f.slug}`,
+          name: f.name,
+          description: f.description,
+        }))
       : getComponentsByCategory(id)
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
-      <PageHeader title={category.label} description={category.description} breadcrumb={{ href: "/", label: "Overview" }} />
+      <PageHeader
+        title={category.label}
+        description={category.description}
+        breadcrumb={{ href: "/", label: "Overview" }}
+      />
       {items.length === 0 ? (
         <p className="rounded-lg border border-dashed p-8 text-center text-foreground-muted">
           No components in this category yet.
@@ -43,7 +55,10 @@ export default async function CategoryPage({ params }: PageProps<"/categories/[c
               <Card interactive className="h-full">
                 <CardHeader className="pb-4">
                   <CardTitle>
-                    <Link href={item.href} className="after:absolute after:inset-0 focus-visible:outline-none">
+                    <Link
+                      href={item.href}
+                      className="after:absolute after:inset-0 focus-visible:outline-none"
+                    >
                       {item.name}
                     </Link>
                   </CardTitle>

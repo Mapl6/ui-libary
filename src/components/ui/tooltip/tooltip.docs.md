@@ -3,8 +3,10 @@
 ```tsx
 import { Tooltip } from "@/components/ui/tooltip"
 
-<Tooltip content="Archive · E">
-  <Button iconOnly aria-label="Archive"><Archive /></Button>
+;<Tooltip content="Archive · E">
+  <Button iconOnly aria-label="Archive">
+    <Archive />
+  </Button>
 </Tooltip>
 ```
 

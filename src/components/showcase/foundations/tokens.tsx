@@ -14,15 +14,51 @@ const [light] = themes
 
 export function TokensFoundation() {
   const groups: [string, string, Record<string, string>][] = [
-    ["Colors (per theme)", "--ui-*", Object.fromEntries(Object.entries(light.colors).map(([k, v]) => [`ui-${k}`, v]))],
-    ["Font size", "--text-*", Object.fromEntries(Object.entries(fontSize).map(([k, [s]]) => [`text-${k}`, s]))],
+    [
+      "Colors (per theme)",
+      "--ui-*",
+      Object.fromEntries(Object.entries(light.colors).map(([k, v]) => [`ui-${k}`, v])),
+    ],
+    [
+      "Font size",
+      "--text-*",
+      Object.fromEntries(Object.entries(fontSize).map(([k, [s]]) => [`text-${k}`, s])),
+    ],
     ["Spacing", "--spacing", { spacing: spacingUnit }],
-    ["Radius", "--radius-*", Object.fromEntries(Object.entries(radius).map(([k, v]) => [`radius-${k}`, v]))],
-    ["Shadow", "--shadow-*", Object.fromEntries(Object.entries(shadows).map(([k, v]) => [`shadow-${k}`, v]))],
-    ["Breakpoint", "--breakpoint-*", Object.fromEntries(Object.entries(breakpoints).map(([k, v]) => [`breakpoint-${k}`, v]))],
-    ["Z-index", "--z-index-*", Object.fromEntries(Object.entries(zIndex).map(([k, v]) => [`z-index-${k}`, v]))],
-    ["Duration", "--transition-duration-*", Object.fromEntries(Object.entries(duration).map(([k, v]) => [`transition-duration-${k}`, v]))],
-    ["Easing", "--ease-*", Object.fromEntries(Object.entries(easing).map(([k, v]) => [`ease-${k}`, v]))],
+    [
+      "Radius",
+      "--radius-*",
+      Object.fromEntries(Object.entries(radius).map(([k, v]) => [`radius-${k}`, v])),
+    ],
+    [
+      "Shadow",
+      "--shadow-*",
+      Object.fromEntries(Object.entries(shadows).map(([k, v]) => [`shadow-${k}`, v])),
+    ],
+    [
+      "Breakpoint",
+      "--breakpoint-*",
+      Object.fromEntries(
+        Object.entries(breakpoints).map(([k, v]) => [`breakpoint-${k}`, v])
+      ),
+    ],
+    [
+      "Z-index",
+      "--z-index-*",
+      Object.fromEntries(Object.entries(zIndex).map(([k, v]) => [`z-index-${k}`, v])),
+    ],
+    [
+      "Duration",
+      "--transition-duration-*",
+      Object.fromEntries(
+        Object.entries(duration).map(([k, v]) => [`transition-duration-${k}`, v])
+      ),
+    ],
+    [
+      "Easing",
+      "--ease-*",
+      Object.fromEntries(Object.entries(easing).map(([k, v]) => [`ease-${k}`, v])),
+    ],
   ]
 
   return (
@@ -47,7 +83,10 @@ src/styles/tokens.css      :root / [data-theme] variables  +  Tailwind @theme
         />
       </FoundationSection>
 
-      <FoundationSection title="All tokens" description="Default (light) values shown for colors. See Colors for per-theme values.">
+      <FoundationSection
+        title="All tokens"
+        description="Default (light) values shown for colors. See Colors for per-theme values."
+      >
         <div className="grid gap-4 lg:grid-cols-2">
           {groups.map(([title, pattern, values]) => (
             <div key={title} className="overflow-hidden rounded-lg border">
@@ -57,11 +96,20 @@ src/styles/tokens.css      :root / [data-theme] variables  +  Tailwind @theme
                   {pattern}
                 </code>
               </div>
-              <dl dir="ltr" className="scrollbar-thin max-h-72 divide-y overflow-y-auto text-xs">
+              <dl
+                dir="ltr"
+                className="max-h-72 scrollbar-thin divide-y overflow-y-auto text-xs"
+              >
                 {Object.entries(values).map(([name, value]) => (
-                  <div key={name} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-3 px-3 py-1.5">
+                  <div
+                    key={name}
+                    className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-3 px-3 py-1.5"
+                  >
                     <dt className="truncate font-mono">--{name}</dt>
-                    <dd className="truncate font-mono text-foreground-muted" title={value}>
+                    <dd
+                      className="truncate font-mono text-foreground-muted"
+                      title={value}
+                    >
                       {value}
                     </dd>
                   </div>

@@ -4,7 +4,8 @@ import { Input } from "./input"
 
 export default defineShowcase({
   name: "Input",
-  description: "A single-line text field with label, help text, validation state and start/end addons.",
+  description:
+    "A single-line text field with label, help text, validation state and start/end addons.",
   category: "forms",
   tags: ["text field", "form", "textbox", "email", "search"],
   component: Input,

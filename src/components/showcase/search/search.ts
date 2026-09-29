@@ -29,5 +29,7 @@ export function searchItems(items: SearchItem[], query: string): SearchItem[] {
     return [{ item, score }]
   })
 
-  return scored.sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title)).map((s) => s.item)
+  return scored
+    .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
+    .map((s) => s.item)
 }

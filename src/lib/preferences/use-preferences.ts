@@ -8,7 +8,11 @@ import { getPreferences, getServerPreferences, setPreferences, subscribe } from 
 
 /** Theme, direction and locale, persisted in localStorage and applied to <html>. */
 export function usePreferences() {
-  const preferences = useSyncExternalStore(subscribe, getPreferences, getServerPreferences)
+  const preferences = useSyncExternalStore(
+    subscribe,
+    getPreferences,
+    getServerPreferences
+  )
   return [preferences, setPreferences] as const
 }
 

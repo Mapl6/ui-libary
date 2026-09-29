@@ -43,15 +43,21 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
   const grouped = useMemo(() => {
     const order: SearchGroup[] = ["components", "foundations", "guides"]
     // With a query, keep global relevance order; without one, group by type.
-    return query.trim() ? results : order.flatMap((g) => results.filter((r) => r.group === g))
+    return query.trim()
+      ? results
+      : order.flatMap((g) => results.filter((r) => r.group === g))
   }, [results, query])
 
   // Global shortcuts: ⌘K / Ctrl+K anywhere, "/" outside text fields.
   useEffect(() => {
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
       const target = event.target as HTMLElement
-      const typing = target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)
-      if ((event.key === "k" && (event.metaKey || event.ctrlKey)) || (event.key === "/" && !typing)) {
+      const typing =
+        target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)
+      if (
+        (event.key === "k" && (event.metaKey || event.ctrlKey)) ||
+        (event.key === "/" && !typing)
+      ) {
         event.preventDefault()
         onOpenChange(!open)
       }
@@ -61,7 +67,9 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
   }, [open, onOpenChange])
 
   useEffect(() => {
-    listRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" })
+    listRef.current
+      ?.querySelector('[aria-selected="true"]')
+      ?.scrollIntoView({ block: "nearest" })
   }, [active])
 
   const go = (item: SearchItem | undefined) => {
@@ -90,8 +98,6 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
     }
     onOpenChange(next)
   }
-
-  let lastGroup: SearchGroup | null = null
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -122,24 +128,37 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
             onKeyDown={onKeyDown}
             className="h-12 w-full bg-transparent text-md outline-none placeholder:text-foreground-subtle"
           />
-          <kbd className="rounded-sm border px-1.5 py-0.5 font-sans text-2xs text-foreground-subtle">Esc</kbd>
+          <kbd className="rounded-sm border px-1.5 py-0.5 font-sans text-2xs text-foreground-subtle">
+            Esc
+          </kbd>
         </div>
 
-        <ul ref={listRef} id={listId} role="listbox" aria-label={t("search.button")} className="scrollbar-thin max-h-[50dvh] overflow-y-auto p-2">
+        <ul
+          ref={listRef}
+          id={listId}
+          role="listbox"
+          aria-label={t("search.button")}
+          className="max-h-[50dvh] scrollbar-thin overflow-y-auto p-2"
+        >
           {grouped.length === 0 && (
-            <li role="presentation" className="px-3 py-10 text-center text-sm text-foreground-muted">
+            <li
+              role="presentation"
+              className="px-3 py-10 text-center text-sm text-foreground-muted"
+            >
               {t("search.empty")} “{query}”
             </li>
           )}
           {grouped.map((item, index) => {
-            const showHeading = !query.trim() && item.group !== lastGroup
-            lastGroup = item.group
+            const showHeading = !query.trim() && item.group !== grouped[index - 1]?.group
             const Icon = groupIcons[item.group]
             const selected = index === active
             return (
               <li key={item.href} role="presentation">
                 {showHeading && (
-                  <div role="presentation" className="px-2 pt-3 pb-1 text-2xs font-medium tracking-wide text-foreground-subtle uppercase first:pt-1">
+                  <div
+                    role="presentation"
+                    className="px-2 pt-3 pb-1 text-2xs font-medium tracking-wide text-foreground-subtle uppercase first:pt-1"
+                  >
                     {t(groupLabels[item.group])}
                   </div>
                 )}
@@ -158,11 +177,24 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline gap-2">
                       <span className="truncate font-medium">{item.title}</span>
-                      {item.category && <span className="shrink-0 text-xs text-foreground-subtle">{item.category}</span>}
+                      {item.category && (
+                        <span className="shrink-0 text-xs text-foreground-subtle">
+                          {item.category}
+                        </span>
+                      )}
                     </div>
-                    {item.description && <p className="truncate text-sm text-foreground-muted">{item.description}</p>}
+                    {item.description && (
+                      <p className="truncate text-sm text-foreground-muted">
+                        {item.description}
+                      </p>
+                    )}
                   </div>
-                  {selected && <CornerDownLeft aria-hidden className="size-3.5 shrink-0 text-foreground-subtle" />}
+                  {selected && (
+                    <CornerDownLeft
+                      aria-hidden
+                      className="size-3.5 shrink-0 text-foreground-subtle"
+                    />
+                  )}
                 </div>
               </li>
             )
@@ -170,9 +202,15 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
         </ul>
 
         <div className="hidden items-center gap-4 border-t px-4 py-2 text-xs text-foreground-subtle sm:flex">
-          <span><Kbd>↑</Kbd> <Kbd>↓</Kbd> {t("search.hint.navigate")}</span>
-          <span><Kbd>↵</Kbd> {t("search.hint.select")}</span>
-          <span><Kbd>Esc</Kbd> {t("search.hint.close")}</span>
+          <span>
+            <Kbd>↑</Kbd> <Kbd>↓</Kbd> {t("search.hint.navigate")}
+          </span>
+          <span>
+            <Kbd>↵</Kbd> {t("search.hint.select")}
+          </span>
+          <span>
+            <Kbd>Esc</Kbd> {t("search.hint.close")}
+          </span>
         </div>
       </DialogContent>
     </Dialog>
@@ -180,5 +218,9 @@ export function CommandPalette({ items, open, onOpenChange }: CommandPaletteProp
 }
 
 function Kbd({ children }: { children: string }) {
-  return <kbd className="inline-flex min-w-5 justify-center rounded-sm border bg-surface px-1 font-sans text-2xs">{children}</kbd>
+  return (
+    <kbd className="inline-flex min-w-5 justify-center rounded-sm border bg-surface px-1 font-sans text-2xs">
+      {children}
+    </kbd>
+  )
 }

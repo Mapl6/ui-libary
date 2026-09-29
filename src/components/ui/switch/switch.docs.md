@@ -8,7 +8,11 @@
 ```tsx
 import { Switch } from "@/components/ui/switch"
 
-<Switch label="Notifications" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
+;<Switch
+  label="Notifications"
+  checked={enabled}
+  onChange={(e) => setEnabled(e.target.checked)}
+/>
 ```
 
 ## Accessibility

@@ -38,7 +38,12 @@ export default function SkeletonLoadingCard() {
           )}
         </CardContent>
       </Card>
-      <Button size="sm" variant="outline" onClick={() => setLoading(true)} disabled={loading}>
+      <Button
+        size="sm"
+        variant="outline"
+        onClick={() => setLoading(true)}
+        disabled={loading}
+      >
         Reload
       </Button>
     </div>

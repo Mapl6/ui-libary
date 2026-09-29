@@ -4,7 +4,8 @@ import { Skeleton } from "./skeleton"
 
 export default defineShowcase({
   name: "Skeleton",
-  description: "Placeholder shapes that mirror content while it loads, reducing layout shift.",
+  description:
+    "Placeholder shapes that mirror content while it loads, reducing layout shift.",
   category: "utilities",
   tags: ["loading", "placeholder", "shimmer", "ghost"],
   component: Skeleton,

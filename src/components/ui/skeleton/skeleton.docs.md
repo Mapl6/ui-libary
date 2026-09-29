@@ -3,7 +3,7 @@
 ```tsx
 import { Skeleton } from "@/components/ui/skeleton"
 
-<div aria-busy="true">
+;<div aria-busy="true">
   <Skeleton shape="circle" width={40} />
   <Skeleton shape="text" lines={2} />
 </div>

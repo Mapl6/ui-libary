@@ -6,7 +6,7 @@ result is unknown. For content with a known shape, prefer **Skeleton**.
 ```tsx
 import { Spinner } from "@/components/ui/spinner"
 
-<Spinner label="Loading orders" />
+;<Spinner label="Loading orders" />
 ```
 
 ## Accessibility

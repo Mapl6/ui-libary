@@ -3,7 +3,10 @@ import type { ComponentType } from "react"
 import { ColorsFoundation } from "@/components/showcase/foundations/colors"
 import { IconsFoundation } from "@/components/showcase/foundations/icons"
 import { MotionFoundation } from "@/components/showcase/foundations/motion"
-import { RadiusFoundation, ShadowsFoundation } from "@/components/showcase/foundations/radius-shadows"
+import {
+  RadiusFoundation,
+  ShadowsFoundation,
+} from "@/components/showcase/foundations/radius-shadows"
 import { SpacingFoundation } from "@/components/showcase/foundations/spacing"
 import { TokensFoundation } from "@/components/showcase/foundations/tokens"
 import { TypographyFoundation } from "@/components/showcase/foundations/typography"

@@ -1,6 +1,15 @@
 "use client"
 
-import { Component, type ErrorInfo, type ReactNode, use, useCallback, useEffect, useRef, useState } from "react"
+import {
+  Component,
+  type ErrorInfo,
+  type ReactNode,
+  use,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 
 import { initialArgs } from "@/lib/registry/controls"
 import type { Args, PropDoc } from "@/lib/registry/types"
@@ -41,10 +50,18 @@ export function FrameRuntime({ slug, props }: FrameRuntimeProps) {
     if (fromUrl) setArgs(fromUrl)
 
     const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin || !isMessage<ParentMessage>(event.data)) return
+      if (
+        event.origin !== window.location.origin ||
+        !isMessage<ParentMessage>(event.data)
+      )
+        return
       const message = event.data
       if (message.type === "args") setArgs(message.args)
-      if (message.type === "env") document.documentElement.toggleAttribute("data-reduced-motion", message.reducedMotion)
+      if (message.type === "env")
+        document.documentElement.toggleAttribute(
+          "data-reduced-motion",
+          message.reducedMotion
+        )
     }
     window.addEventListener("message", onMessage)
     postToParent({ source: "ui-library", type: "ready" })
@@ -55,7 +72,11 @@ export function FrameRuntime({ slug, props }: FrameRuntimeProps) {
     const node = contentRef.current
     if (!node) return
     const observer = new ResizeObserver(() => {
-      postToParent({ source: "ui-library", type: "resize", height: node.getBoundingClientRect().height })
+      postToParent({
+        source: "ui-library",
+        type: "resize",
+        height: node.getBoundingClientRect().height,
+      })
     })
     observer.observe(node)
     return () => observer.disconnect()
@@ -70,7 +91,10 @@ export function FrameRuntime({ slug, props }: FrameRuntimeProps) {
 
   return (
     <div className="flex min-h-dvh items-center justify-center">
-      <div ref={contentRef} className="flex w-full items-center justify-center p-8 sm:p-10">
+      <div
+        ref={contentRef}
+        className="flex w-full items-center justify-center p-8 sm:p-10"
+      >
         <PreviewErrorBoundary resetKey={JSON.stringify(args)}>
           {meta.render ? meta.render(args, update) : <Target {...args} />}
         </PreviewErrorBoundary>
@@ -90,8 +114,13 @@ class PreviewErrorBoundary extends Component<BoundaryProps, BoundaryState> {
     return { error }
   }
 
-  static getDerivedStateFromProps(props: BoundaryProps, state: BoundaryState): Partial<BoundaryState> | null {
-    return props.resetKey !== state.resetKey ? { error: null, resetKey: props.resetKey } : null
+  static getDerivedStateFromProps(
+    props: BoundaryProps,
+    state: BoundaryState
+  ): Partial<BoundaryState> | null {
+    return props.resetKey !== state.resetKey
+      ? { error: null, resetKey: props.resetKey }
+      : null
   }
 
   override componentDidCatch(error: Error, info: ErrorInfo) {
@@ -101,7 +130,10 @@ class PreviewErrorBoundary extends Component<BoundaryProps, BoundaryState> {
   override render() {
     if (this.state.error) {
       return (
-        <div role="alert" className="max-w-md rounded-lg border border-danger/30 bg-danger-subtle p-3 text-sm text-danger-subtle-foreground">
+        <div
+          role="alert"
+          className="max-w-md rounded-lg border border-danger/30 bg-danger-subtle p-3 text-sm text-danger-subtle-foreground"
+        >
           <p className="font-medium">This combination of props failed to render.</p>
           <pre dir="ltr" className="mt-1 font-mono text-xs whitespace-pre-wrap">
             {this.state.error.message}

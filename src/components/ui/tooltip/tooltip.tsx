@@ -1,6 +1,13 @@
 "use client"
 
-import { type ReactElement, type ReactNode, useEffect, useId, useRef, useState } from "react"
+import {
+  type ReactElement,
+  type ReactNode,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react"
 
 import { cn } from "@/lib/utils/cn"
 import { Slot } from "@/lib/utils/slot"
@@ -42,7 +49,14 @@ const sides: Record<TooltipSide, string> = {
  * A short label shown on hover and keyboard focus. The trigger is described by the
  * tooltip via `aria-describedby`.
  */
-export function Tooltip({ content, children, side = "top", delay = 400, open, disabled = false }: TooltipProps) {
+export function Tooltip({
+  content,
+  children,
+  side = "top",
+  delay = 400,
+  open,
+  disabled = false,
+}: TooltipProps) {
   const [visible, setVisible] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const id = useId()

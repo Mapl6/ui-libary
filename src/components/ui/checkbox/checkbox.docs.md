@@ -3,7 +3,7 @@
 ```tsx
 import { Checkbox } from "@/components/ui/checkbox"
 
-<Checkbox name="terms" label="I agree to the terms" required />
+;<Checkbox name="terms" label="I agree to the terms" required />
 ```
 
 Group related checkboxes in a `<fieldset>` with a `<legend>`.

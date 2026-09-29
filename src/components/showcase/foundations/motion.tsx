@@ -16,13 +16,20 @@ export function MotionFoundation() {
         title="Durations & easing"
         description="Motion is short and functional. Every animation is disabled under prefers-reduced-motion (and the preview's Reduce motion toggle)."
       >
-        <Button variant="outline" onClick={() => setMoved((m) => !m)} className="self-start">
+        <Button
+          variant="outline"
+          onClick={() => setMoved((m) => !m)}
+          className="self-start"
+        >
           Play
         </Button>
         <div className="divide-y rounded-lg border">
           {Object.entries(duration).flatMap(([dName, dValue]) =>
             Object.entries(easing).map(([eName, eValue]) => (
-              <div key={`${dName}-${eName}`} className="grid grid-cols-[1fr_2fr] items-center gap-4 px-4 py-2.5 sm:grid-cols-[14rem_1fr]">
+              <div
+                key={`${dName}-${eName}`}
+                className="grid grid-cols-[1fr_2fr] items-center gap-4 px-4 py-2.5 sm:grid-cols-[14rem_1fr]"
+              >
                 <div className="flex flex-col">
                   <TokenName>
                     duration-{dName} ease-{eName}
@@ -33,7 +40,7 @@ export function MotionFoundation() {
                 </div>
                 <div className="relative h-6 rounded-full bg-neutral-subtle">
                   <div
-                    className="absolute top-1 start-1 size-4 rounded-full bg-primary transition-[inset-inline-start]"
+                    className="absolute start-1 top-1 size-4 rounded-full bg-primary transition-[inset-inline-start]"
                     style={{
                       insetInlineStart: moved ? "calc(100% - 1.25rem)" : "0.25rem",
                       transitionDuration: dValue,

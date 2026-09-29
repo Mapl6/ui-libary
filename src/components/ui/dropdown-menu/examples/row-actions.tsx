@@ -25,7 +25,11 @@ export default function DropdownMenuRowActions() {
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Button variant="ghost" iconOnly aria-label="More actions for quarterly-report.pdf">
+            <Button
+              variant="ghost"
+              iconOnly
+              aria-label="More actions for quarterly-report.pdf"
+            >
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
@@ -37,7 +41,11 @@ export default function DropdownMenuRowActions() {
               Archive
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem icon={<Trash2 />} tone="danger" onSelect={() => setLast("Delete")}>
+            <DropdownMenuItem
+              icon={<Trash2 />}
+              tone="danger"
+              onSelect={() => setLast("Delete")}
+            >
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

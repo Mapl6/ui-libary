@@ -42,7 +42,8 @@ export type PropGroup = {
 /*  Showcase metadata — authored per component in `<slug>.meta.tsx`           */
 /* -------------------------------------------------------------------------- */
 
-export type ControlType = "boolean" | "text" | "textarea" | "number" | "select" | "radio" | "color" | "json"
+export type ControlType =
+  "boolean" | "text" | "textarea" | "number" | "select" | "radio" | "color" | "json"
 
 export type ControlOverride = {
   control?: ControlType
@@ -73,7 +74,10 @@ export type ShowcaseMeta<P extends object = Args> = {
    * with a controllable type is included. Use `false` to hide one, or an object to
    * change its control.
    */
-  controls?: { [K in keyof P]?: ControlOverride | false } & Record<string, ControlOverride | false | undefined>
+  controls?: { [K in keyof P]?: ControlOverride | false } & Record<
+    string,
+    ControlOverride | false | undefined
+  >
   /** Custom playground render, for compound components or controlled state. */
   render?: (args: P & Args, update: (patch: Partial<P> & Args) => void) => ReactNode
   /** Custom code snippet for the playground when the default JSX output isn't right. */

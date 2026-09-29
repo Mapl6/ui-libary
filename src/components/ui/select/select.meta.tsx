@@ -4,7 +4,8 @@ import { Select } from "./select"
 
 export default defineShowcase({
   name: "Select",
-  description: "A styled native select with label, placeholder and validation. Uses the platform picker on mobile.",
+  description:
+    "A styled native select with label, placeholder and validation. Uses the platform picker on mobile.",
   category: "forms",
   tags: ["dropdown", "picker", "choice", "combobox", "form"],
   component: Select,

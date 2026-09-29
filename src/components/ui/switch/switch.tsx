@@ -64,7 +64,9 @@ export function Switch({
         className
       )}
     >
-      <span className={cn("relative mt-0.5 inline-flex shrink-0 items-center", tracks[size])}>
+      <span
+        className={cn("relative mt-0.5 inline-flex shrink-0 items-center", tracks[size])}
+      >
         <input
           type="checkbox"
           role="switch"
@@ -92,7 +94,10 @@ export function Switch({
       {(label || description) && (
         <div className="flex flex-col gap-0.5">
           {label && (
-            <label htmlFor={field.controlId} className="cursor-pointer text-base leading-5 text-foreground select-none">
+            <label
+              htmlFor={field.controlId}
+              className="cursor-pointer text-base leading-5 text-foreground select-none"
+            >
               {label}
             </label>
           )}

@@ -19,11 +19,21 @@ type ControlsPanelProps = {
   bare?: boolean
 }
 
-export function ControlsPanel({ controls, args, onChange, onReset, className, bare = false }: ControlsPanelProps) {
+export function ControlsPanel({
+  controls,
+  args,
+  onChange,
+  onReset,
+  className,
+  bare = false,
+}: ControlsPanelProps) {
   const t = useT()
 
   return (
-    <section aria-label={t("playground.controls")} className={cn("flex flex-col", className)}>
+    <section
+      aria-label={t("playground.controls")}
+      className={cn("flex flex-col", className)}
+    >
       {!bare && (
         <header className="flex h-10 shrink-0 items-center justify-between border-b ps-3 pe-1.5">
           <h2 className="text-sm font-medium">{t("playground.controls")}</h2>
@@ -40,7 +50,7 @@ export function ControlsPanel({ controls, args, onChange, onReset, className, ba
       {controls.length === 0 ? (
         <p className="p-3 text-sm text-foreground-muted">{t("playground.noControls")}</p>
       ) : (
-        <div className="scrollbar-thin flex flex-col gap-3.5 overflow-y-auto p-3">
+        <div className="flex scrollbar-thin flex-col gap-3.5 overflow-y-auto p-3">
           {controls.map((control) => (
             <ControlField
               key={control.name}

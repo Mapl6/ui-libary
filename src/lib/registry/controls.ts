@@ -1,4 +1,10 @@
-import type { AnyShowcaseMeta, Args, ControlOverride, ControlType, PropDoc } from "./types"
+import type {
+  AnyShowcaseMeta,
+  Args,
+  ControlOverride,
+  ControlType,
+  PropDoc,
+} from "./types"
 
 export type ResolvedControl = {
   name: string
@@ -38,7 +44,10 @@ function inferControl(prop: PropDoc): ControlType | null {
  * Builds the playground controls from generated prop docs plus the meta's overrides.
  * Overrides for names that aren't props create "virtual" controls (e.g. DialogContent's `title`).
  */
-export function resolveControls(meta: AnyShowcaseMeta, props: PropDoc[]): ResolvedControl[] {
+export function resolveControls(
+  meta: AnyShowcaseMeta,
+  props: PropDoc[]
+): ResolvedControl[] {
   const overrides = meta.controls ?? {}
   const resolved: ResolvedControl[] = []
   const seen = new Set<string>()
@@ -60,7 +69,12 @@ export function resolveControls(meta: AnyShowcaseMeta, props: PropDoc[]): Resolv
   return resolved
 }
 
-function build(name: string, control: ControlType, override?: ControlOverride, prop?: PropDoc): ResolvedControl {
+function build(
+  name: string,
+  control: ControlType,
+  override?: ControlOverride,
+  prop?: PropDoc
+): ResolvedControl {
   return {
     name,
     label: override?.label ?? name,

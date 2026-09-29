@@ -38,7 +38,12 @@ export default defineShowcase({
         <DialogTrigger>
           <Button variant="outline">Open dialog</Button>
         </DialogTrigger>
-        <DialogContent title={title} description="Project names appear in URLs and invitations." placement={placement} size={size}>
+        <DialogContent
+          title={title}
+          description="Project names appear in URLs and invitations."
+          placement={placement}
+          size={size}
+        >
           <Input label="Name" defaultValue="Aurora" autoFocus />
           <DialogFooter>
             <DialogClose>

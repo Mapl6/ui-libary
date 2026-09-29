@@ -58,7 +58,9 @@ export function ControlField({ control, value, onChange }: ControlFieldProps) {
           max={control.max}
           step={control.step}
           value={typeof value === "number" ? value : ""}
-          onChange={(event) => onChange(event.target.value === "" ? undefined : Number(event.target.value))}
+          onChange={(event) =>
+            onChange(event.target.value === "" ? undefined : Number(event.target.value))
+          }
           title={control.description}
         />
       )
@@ -97,8 +99,12 @@ export function ControlField({ control, value, onChange }: ControlFieldProps) {
         <Input
           size="sm"
           label={label}
-          value={typeof value === "string" || typeof value === "number" ? String(value) : ""}
-          onChange={(event) => onChange(event.target.value === "" ? undefined : event.target.value)}
+          value={
+            typeof value === "string" || typeof value === "number" ? String(value) : ""
+          }
+          onChange={(event) =>
+            onChange(event.target.value === "" ? undefined : event.target.value)
+          }
           title={control.description}
         />
       )
@@ -114,7 +120,7 @@ function Segmented({ control, value, onChange }: ControlFieldProps) {
         {(control.options ?? []).map((option) => (
           <label
             key={option}
-            className="relative flex-1 cursor-pointer rounded-sm px-2 py-1 text-center font-mono text-xs text-foreground-muted transition-colors has-checked:bg-surface has-checked:text-foreground has-checked:shadow-xs has-focus-visible:outline-2 has-focus-visible:outline-ring hover:text-foreground"
+            className="relative flex-1 cursor-pointer rounded-sm px-2 py-1 text-center font-mono text-xs text-foreground-muted transition-colors hover:text-foreground has-checked:bg-surface has-checked:text-foreground has-checked:shadow-xs has-focus-visible:outline-2 has-focus-visible:outline-ring"
           >
             <input
               type="radio"

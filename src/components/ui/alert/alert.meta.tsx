@@ -4,7 +4,8 @@ import { Alert } from "./alert"
 
 export default defineShowcase({
   name: "Alert",
-  description: "An inline message for status and important context, with tone-aware ARIA roles and optional actions.",
+  description:
+    "An inline message for status and important context, with tone-aware ARIA roles and optional actions.",
   category: "feedback",
   tags: ["callout", "banner", "notice", "message", "error", "warning"],
   component: Alert,

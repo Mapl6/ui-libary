@@ -25,11 +25,21 @@ type UseFieldOptions = {
 }
 
 /** Wires ids and ARIA attributes between a control, its label and its messages. */
-export function useField({ id, description, error, invalid, describedBy }: UseFieldOptions) {
+export function useField({
+  id,
+  description,
+  error,
+  invalid,
+  describedBy,
+}: UseFieldOptions) {
   const generated = useId()
   const controlId = id ?? generated
   const hasError = Boolean(error)
-  const messageId = hasError ? `${controlId}-error` : description ? `${controlId}-description` : undefined
+  const messageId = hasError
+    ? `${controlId}-error`
+    : description
+      ? `${controlId}-description`
+      : undefined
   return {
     controlId,
     messageId,
@@ -67,7 +77,9 @@ export function Field({
   aside,
 }: FieldProps) {
   return (
-    <div className={cn("flex w-full flex-col gap-1.5", disabled && "opacity-60", className)}>
+    <div
+      className={cn("flex w-full flex-col gap-1.5", disabled && "opacity-60", className)}
+    >
       {(label || aside) && (
         <div className="flex items-baseline justify-between gap-3">
           {label && (

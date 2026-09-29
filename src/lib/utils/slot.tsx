@@ -17,7 +17,11 @@ export function Slot({ children, ...slotProps }: AnyProps & { children: ReactEle
   for (const key of Object.keys(slotProps)) {
     const ours = slotProps[key]
     const theirs = childProps[key]
-    if (/^on[A-Z]/.test(key) && typeof ours === "function" && typeof theirs === "function") {
+    if (
+      /^on[A-Z]/.test(key) &&
+      typeof ours === "function" &&
+      typeof theirs === "function"
+    ) {
       merged[key] = (...args: unknown[]) => {
         theirs(...args)
         const event = args[0] as { defaultPrevented?: boolean } | undefined

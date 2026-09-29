@@ -10,7 +10,10 @@ const meta = {
   title: "Feedback/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
-  args: { content: "Copy to clipboard", children: <Button variant="outline">Copy</Button> },
+  args: {
+    content: "Copy to clipboard",
+    children: <Button variant="outline">Copy</Button>,
+  },
   decorators: [(Story) => <div className="p-12">{Story()}</div>],
 } satisfies Meta<typeof Tooltip>
 
@@ -25,7 +28,9 @@ export const ShowsOnFocusAndDismissesWithEscape: Story = {
   play: async ({ canvas, userEvent }) => {
     await userEvent.tab()
     const tooltip = await canvas.findByRole("tooltip")
-    await expect(canvas.getByRole("button", { name: "Copy" })).toHaveAccessibleDescription("Copy to clipboard")
+    await expect(
+      canvas.getByRole("button", { name: "Copy" })
+    ).toHaveAccessibleDescription("Copy to clipboard")
     await userEvent.keyboard("{Escape}")
     await waitFor(() => expect(tooltip).not.toBeInTheDocument())
   },

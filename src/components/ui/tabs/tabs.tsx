@@ -1,6 +1,13 @@
 "use client"
 
-import { type ComponentProps, type KeyboardEvent, type ReactNode, createContext, use, useId } from "react"
+import {
+  type ComponentProps,
+  type KeyboardEvent,
+  type ReactNode,
+  createContext,
+  use,
+  useId,
+} from "react"
 
 import { useControllableState } from "@/lib/hooks/use-controllable-state"
 import { cn } from "@/lib/utils/cn"
@@ -59,13 +66,23 @@ export function Tabs({
   children,
   ...props
 }: TabsProps) {
-  const [selected, setSelected] = useControllableState({ value, defaultValue, onChange: onValueChange })
+  const [selected, setSelected] = useControllableState({
+    value,
+    defaultValue,
+    onChange: onValueChange,
+  })
   const baseId = useId()
 
   return (
-    <TabsContext value={{ value: selected, setValue: setSelected, baseId, variant, orientation }}>
+    <TabsContext
+      value={{ value: selected, setValue: setSelected, baseId, variant, orientation }}
+    >
       <div
-        className={cn("flex", orientation === "horizontal" ? "flex-col gap-3" : "flex-row gap-4", className)}
+        className={cn(
+          "flex",
+          orientation === "horizontal" ? "flex-col gap-3" : "flex-row gap-4",
+          className
+        )}
         {...props}
       >
         {children}
@@ -87,7 +104,9 @@ export function TabsList({ className, onKeyDown, ...props }: TabsListProps) {
     onKeyDown?.(event)
     if (event.defaultPrevented) return
     const tabs = Array.from(
-      event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)')
+      event.currentTarget.querySelectorAll<HTMLButtonElement>(
+        '[role="tab"]:not(:disabled)'
+      )
     )
     const index = tabs.indexOf(document.activeElement as HTMLButtonElement)
     if (index === -1) return
@@ -116,7 +135,9 @@ export function TabsList({ className, onKeyDown, ...props }: TabsListProps) {
       onKeyDown={handleKeyDown}
       className={cn(
         "flex shrink-0",
-        orientation === "horizontal" ? "scrollbar-thin items-center overflow-x-auto" : "flex-col items-stretch",
+        orientation === "horizontal"
+          ? "scrollbar-thin items-center overflow-x-auto"
+          : "flex-col items-stretch",
         variant === "underline" && orientation === "horizontal" && "gap-4 border-b",
         variant === "underline" && orientation === "vertical" && "gap-0.5 border-e pe-2",
         variant === "pills" && "gap-1 self-start rounded-lg bg-neutral-subtle p-1",
@@ -138,8 +159,20 @@ export type TabsTriggerProps = Omit<ComponentProps<"button">, "value"> & {
 }
 
 /** A single tab. */
-export function TabsTrigger({ value, className, children, onClick, ...props }: TabsTriggerProps) {
-  const { value: selectedValue, setValue, baseId, variant, orientation } = useTabs("TabsTrigger")
+export function TabsTrigger({
+  value,
+  className,
+  children,
+  onClick,
+  ...props
+}: TabsTriggerProps) {
+  const {
+    value: selectedValue,
+    setValue,
+    baseId,
+    variant,
+    orientation,
+  } = useTabs("TabsTrigger")
   const selected = selectedValue === value
   const id = safeId(value)
 
@@ -188,7 +221,13 @@ export type TabsPanelProps = ComponentProps<"div"> & {
 }
 
 /** Content for one tab. */
-export function TabsPanel({ value, keepMounted = false, className, children, ...props }: TabsPanelProps) {
+export function TabsPanel({
+  value,
+  keepMounted = false,
+  className,
+  children,
+  ...props
+}: TabsPanelProps) {
   const { value: selectedValue, baseId } = useTabs("TabsPanel")
   const selected = selectedValue === value
   const id = safeId(value)

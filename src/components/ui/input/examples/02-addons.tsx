@@ -30,7 +30,13 @@ export default function InputAddons() {
           ) : null
         }
       />
-      <Input label="Weight" type="number" inputMode="decimal" defaultValue={72} endAddon={<span className="pe-1 text-sm">kg</span>} />
+      <Input
+        label="Weight"
+        type="number"
+        inputMode="decimal"
+        defaultValue={72}
+        endAddon={<span className="pe-1 text-sm">kg</span>}
+      />
     </div>
   )
 }

@@ -28,7 +28,9 @@ export default function CheckboxSelectAll() {
             label={item}
             checked={selected.includes(item)}
             onChange={(event) =>
-              setSelected((prev) => (event.target.checked ? [...prev, item] : prev.filter((i) => i !== item)))
+              setSelected((prev) =>
+                event.target.checked ? [...prev, item] : prev.filter((i) => i !== item)
+              )
             }
           />
         ))}

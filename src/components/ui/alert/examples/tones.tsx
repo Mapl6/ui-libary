@@ -25,10 +25,14 @@ export default function AlertTones() {
           </Button>
         }
       >
-        You've used 92% of your 10 GB.
+        You&apos;ve used 92% of your 10 GB.
       </Alert>
       {visible ? (
-        <Alert tone="danger" title="Deployment failed" onDismiss={() => setVisible(false)}>
+        <Alert
+          tone="danger"
+          title="Deployment failed"
+          onDismiss={() => setVisible(false)}
+        >
           Build step exited with code 1.
         </Alert>
       ) : (

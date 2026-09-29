@@ -26,7 +26,7 @@ type MenuContextValue = {
   contentId: string
   rootRef: RefObject<HTMLDivElement | null>
   triggerRef: RefObject<HTMLElement | null>
-  focusIntent: RefObject<FocusIntent>
+  focusIntentRef: RefObject<FocusIntent>
 }
 
 const MenuContext = createContext<MenuContextValue | null>(null)
@@ -56,12 +56,22 @@ export type DropdownMenuProps = {
 }
 
 /** A menu of actions opened from a button, following the WAI-ARIA menu button pattern. */
-export function DropdownMenu({ open, defaultOpen = false, onOpenChange, children, className }: DropdownMenuProps) {
-  const [isOpen, setOpen] = useControllableState({ value: open, defaultValue: defaultOpen, onChange: onOpenChange })
+export function DropdownMenu({
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  children,
+  className,
+}: DropdownMenuProps) {
+  const [isOpen, setOpen] = useControllableState({
+    value: open,
+    defaultValue: defaultOpen,
+    onChange: onOpenChange,
+  })
   const id = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
-  const focusIntent = useRef<FocusIntent>("first")
+  const focusIntentRef = useRef<FocusIntent>("first")
 
   // Close on outside pointer down.
   useEffect(() => {
@@ -82,7 +92,7 @@ export function DropdownMenu({ open, defaultOpen = false, onOpenChange, children
         contentId: `${id}-content`,
         rootRef,
         triggerRef,
-        focusIntent,
+        focusIntentRef,
       }}
     >
       <div ref={rootRef} className={cn("relative inline-flex", className)}>
@@ -99,12 +109,13 @@ export type DropdownMenuTriggerProps = {
 
 /** Opens the menu on click, Enter, Space, ArrowDown (first item) or ArrowUp (last item). */
 export function DropdownMenuTrigger({ children }: DropdownMenuTriggerProps) {
-  const { open, setOpen, triggerId, contentId, triggerRef, focusIntent } = useMenu("DropdownMenuTrigger")
+  const { open, setOpen, triggerId, contentId, triggerRef, focusIntentRef } =
+    useMenu("DropdownMenuTrigger")
 
   const onKeyDown = (event: KeyboardEvent) => {
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault()
-      focusIntent.current = event.key === "ArrowDown" ? "first" : "last"
+      focusIntentRef.current = event.key === "ArrowDown" ? "first" : "last"
       setOpen(true)
     }
   }
@@ -117,7 +128,7 @@ export function DropdownMenuTrigger({ children }: DropdownMenuTriggerProps) {
       aria-expanded={open}
       aria-controls={open ? contentId : undefined}
       onClick={() => {
-        focusIntent.current = "first"
+        focusIntentRef.current = "first"
         setOpen(!open)
       }}
       onKeyDown={onKeyDown}
@@ -141,17 +152,28 @@ export type DropdownMenuContentProps = ComponentProps<"div"> & {
 }
 
 /** The menu surface. Renders only while open. */
-export function DropdownMenuContent({ align = "start", side = "bottom", className, children, ...props }: DropdownMenuContentProps) {
-  const { open, setOpen, triggerId, contentId, triggerRef, focusIntent } = useMenu("DropdownMenuContent")
+export function DropdownMenuContent({
+  align = "start",
+  side = "bottom",
+  className,
+  children,
+  ...props
+}: DropdownMenuContentProps) {
+  const { open, setOpen, triggerId, contentId, triggerRef, focusIntentRef } =
+    useMenu("DropdownMenuContent")
   const ref = useRef<HTMLDivElement>(null)
-  const typeahead = useRef({ query: "", timer: undefined as ReturnType<typeof setTimeout> | undefined })
+  const typeahead = useRef({
+    query: "",
+    timer: undefined as ReturnType<typeof setTimeout> | undefined,
+  })
 
   useEffect(() => {
     if (!open) return
     const items = ref.current?.querySelectorAll<HTMLElement>(ITEM_SELECTOR)
-    const target = focusIntent.current === "last" ? items?.[items.length - 1] : items?.[0]
+    const target =
+      focusIntentRef.current === "last" ? items?.[items.length - 1] : items?.[0]
     target?.focus()
-  }, [open, focusIntent])
+  }, [open, focusIntentRef])
 
   if (!open) return null
 
@@ -161,7 +183,9 @@ export function DropdownMenuContent({ align = "start", side = "bottom", classNam
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const items = Array.from(event.currentTarget.querySelectorAll<HTMLElement>(ITEM_SELECTOR))
+    const items = Array.from(
+      event.currentTarget.querySelectorAll<HTMLElement>(ITEM_SELECTOR)
+    )
     const index = items.indexOf(document.activeElement as HTMLElement)
     const focusAt = (i: number) => items[(i + items.length) % items.length]?.focus()
 
@@ -197,7 +221,11 @@ export function DropdownMenuContent({ align = "start", side = "bottom", classNam
           state.query += event.key.toLowerCase()
           state.timer = setTimeout(() => (state.query = ""), 500)
           const ordered = [...items.slice(index + 1), ...items.slice(0, index + 1)]
-          ordered.find((item) => item.textContent?.trim().toLowerCase().startsWith(state.query))?.focus()
+          ordered
+            .find((item) =>
+              item.textContent?.trim().toLowerCase().startsWith(state.query)
+            )
+            ?.focus()
         }
     }
   }
@@ -214,7 +242,9 @@ export function DropdownMenuContent({ align = "start", side = "bottom", classNam
       className={cn(
         "absolute z-dropdown flex min-w-44 flex-col rounded-lg border bg-surface-raised p-1 text-foreground shadow-lg",
         "transition-[opacity,translate] duration-fast starting:opacity-0",
-        side === "bottom" ? "top-full mt-1 starting:-translate-y-1" : "bottom-full mb-1 starting:translate-y-1",
+        side === "bottom"
+          ? "top-full mt-1 starting:-translate-y-1"
+          : "bottom-full mb-1 starting:translate-y-1",
         align === "start" ? "start-0" : "end-0",
         className
       )}
@@ -287,15 +317,31 @@ export function DropdownMenuItem({
     >
       {icon}
       <span className="flex-1 truncate">{children}</span>
-      {shortcut && <kbd className="ms-4 font-sans text-xs text-foreground-subtle">{shortcut}</kbd>}
+      {shortcut && (
+        <kbd className="ms-4 font-sans text-xs text-foreground-subtle">{shortcut}</kbd>
+      )}
     </div>
   )
 }
 
 export function DropdownMenuLabel({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("px-2 pt-1.5 pb-1 text-xs font-medium text-foreground-subtle", className)} {...props} />
+  return (
+    <div
+      className={cn(
+        "px-2 pt-1.5 pb-1 text-xs font-medium text-foreground-subtle",
+        className
+      )}
+      {...props}
+    />
+  )
 }
 
 export function DropdownMenuSeparator({ className, ...props }: ComponentProps<"div">) {
-  return <div role="separator" className={cn("-mx-1 my-1 h-px bg-border", className)} {...props} />
+  return (
+    <div
+      role="separator"
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
+  )
 }

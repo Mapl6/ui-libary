@@ -7,7 +7,10 @@ import type { PropGroup } from "@/lib/registry/types"
 function formatDescription(text: string): ReactNode {
   return text.split(/(`[^`]+`)/g).map((part, i) =>
     part.startsWith("`") && part.endsWith("`") ? (
-      <code key={i} className="rounded-xs bg-neutral-subtle px-1 py-px font-mono text-[0.8em]">
+      <code
+        key={i}
+        className="rounded-xs bg-neutral-subtle px-1 py-px font-mono text-[0.8em]"
+      >
         {part.slice(1, -1)}
       </code>
     ) : (
@@ -29,7 +32,10 @@ export function PropsTable({ groups, footnote }: PropsTableProps) {
       {groups.map((group) => (
         <section key={group.component} aria-labelledby={`props-${group.component}`}>
           {groups.length > 1 && (
-            <h3 id={`props-${group.component}`} className="mb-2 font-mono text-sm font-semibold">
+            <h3
+              id={`props-${group.component}`}
+              className="mb-2 font-mono text-sm font-semibold"
+            >
               {`<${group.component}>`}
             </h3>
           )}
@@ -42,17 +48,28 @@ export function PropsTable({ groups, footnote }: PropsTableProps) {
               <table className="w-full min-w-[40rem] border-collapse text-start text-sm">
                 <thead className="bg-surface-muted text-xs text-foreground-muted">
                   <tr>
-                    <th scope="col" className="w-40 px-3 py-2 text-start font-medium">Prop</th>
-                    <th scope="col" className="px-3 py-2 text-start font-medium">Type</th>
-                    <th scope="col" className="w-28 px-3 py-2 text-start font-medium">Default</th>
-                    <th scope="col" className="px-3 py-2 text-start font-medium">Description</th>
+                    <th scope="col" className="w-40 px-3 py-2 text-start font-medium">
+                      Prop
+                    </th>
+                    <th scope="col" className="px-3 py-2 text-start font-medium">
+                      Type
+                    </th>
+                    <th scope="col" className="w-28 px-3 py-2 text-start font-medium">
+                      Default
+                    </th>
+                    <th scope="col" className="px-3 py-2 text-start font-medium">
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {group.props.map((prop) => (
                     <tr key={prop.name} className="border-t align-top">
                       <th scope="row" className="px-3 py-2.5 text-start font-normal">
-                        <span dir="ltr" className="inline-flex items-center gap-1.5 font-mono text-[0.8125rem] font-medium text-foreground">
+                        <span
+                          dir="ltr"
+                          className="inline-flex items-center gap-1.5 font-mono text-[0.8125rem] font-medium text-foreground"
+                        >
                           {prop.name}
                           {prop.required && (
                             <Badge size="sm" tone="danger" appearance="outline">
@@ -62,13 +79,19 @@ export function PropsTable({ groups, footnote }: PropsTableProps) {
                         </span>
                       </th>
                       <td className="px-3 py-2.5">
-                        <code dir="ltr" className="font-mono text-[0.8125rem] break-words text-primary-subtle-foreground">
+                        <code
+                          dir="ltr"
+                          className="font-mono text-[0.8125rem] break-words text-primary-subtle-foreground"
+                        >
                           {prop.type}
                         </code>
                       </td>
                       <td className="px-3 py-2.5">
                         {prop.defaultValue ? (
-                          <code dir="ltr" className="font-mono text-[0.8125rem] text-foreground-muted">
+                          <code
+                            dir="ltr"
+                            className="font-mono text-[0.8125rem] text-foreground-muted"
+                          >
                             {prop.defaultValue}
                           </code>
                         ) : (

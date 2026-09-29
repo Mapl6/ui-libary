@@ -3,7 +3,9 @@
 ```tsx
 import { Badge } from "@/components/ui/badge"
 
-<Badge tone="warning" dot>Pending review</Badge>
+;<Badge tone="warning" dot>
+  Pending review
+</Badge>
 ```
 
 - Badges are static labels. For removable filters or selectable chips, use a Button (a Chip component is planned).

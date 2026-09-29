@@ -17,7 +17,11 @@ export default async function ShowcaseLayout({ children }: LayoutProps<"/">) {
     ...categories.map((category) => ({
       id: category.id,
       label: { text: category.label },
-      items: category.components.map((c) => ({ href: c.href, label: c.name, status: c.status })),
+      items: category.components.map((c) => ({
+        href: c.href,
+        label: c.name,
+        status: c.status,
+      })),
     })),
     {
       id: "guides",

@@ -10,13 +10,17 @@ export function generateStaticParams() {
   return foundations.map((f) => ({ slug: f.slug }))
 }
 
-export async function generateMetadata({ params }: PageProps<"/foundations/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/foundations/[slug]">): Promise<Metadata> {
   const { slug } = await params
   const foundation = getFoundation(slug)
   return foundation ? { title: foundation.name, description: foundation.description } : {}
 }
 
-export default async function FoundationPage({ params }: PageProps<"/foundations/[slug]">) {
+export default async function FoundationPage({
+  params,
+}: PageProps<"/foundations/[slug]">) {
   const { slug } = await params
   const foundation = getFoundation(slug)
   if (!foundation) notFound()

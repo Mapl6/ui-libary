@@ -49,10 +49,21 @@ export type DialogProps = {
 }
 
 /** Root of a modal dialog. Holds the open state shared by trigger and content. */
-export function Dialog({ open, defaultOpen = false, onOpenChange, children }: DialogProps) {
-  const [isOpen, setOpen] = useControllableState({ value: open, defaultValue: defaultOpen, onChange: onOpenChange })
+export function Dialog({
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  children,
+}: DialogProps) {
+  const [isOpen, setOpen] = useControllableState({
+    value: open,
+    defaultValue: defaultOpen,
+    onChange: onOpenChange,
+  })
   const contentId = useId()
-  return <DialogContext value={{ open: isOpen, setOpen, contentId }}>{children}</DialogContext>
+  return (
+    <DialogContext value={{ open: isOpen, setOpen, contentId }}>{children}</DialogContext>
+  )
 }
 
 export type DialogTriggerProps = {
@@ -64,7 +75,12 @@ export type DialogTriggerProps = {
 export function DialogTrigger({ children }: DialogTriggerProps) {
   const { open, setOpen, contentId } = useDialog("DialogTrigger")
   return (
-    <Slot aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? contentId : undefined} onClick={() => setOpen(true)}>
+    <Slot
+      aria-haspopup="dialog"
+      aria-expanded={open}
+      aria-controls={open ? contentId : undefined}
+      onClick={() => setOpen(true)}
+    >
       {children}
     </Slot>
   )
@@ -201,7 +217,12 @@ export function DialogContent({
     pointerDownOnBackdrop.current = event.target === event.currentTarget
   }
   const onClick = (event: MouseEvent<HTMLDialogElement>) => {
-    if (closeOnBackdrop && pointerDownOnBackdrop.current && event.target === event.currentTarget) setOpen(false)
+    if (
+      closeOnBackdrop &&
+      pointerDownOnBackdrop.current &&
+      event.target === event.currentTarget
+    )
+      setOpen(false)
   }
 
   const sheet = placement === "start" || placement === "end"
@@ -227,7 +248,9 @@ export function DialogContent({
       {...props}
     >
       <div className="flex max-h-[inherit] flex-col">
-        <header className={cn("flex items-start gap-3 px-5 pt-5", hideTitle && "sr-only")}>
+        <header
+          className={cn("flex items-start gap-3 px-5 pt-5", hideTitle && "sr-only")}
+        >
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <h2 id={titleId} className="text-lg leading-6 font-semibold tracking-tight">
               {title}
@@ -249,7 +272,15 @@ export function DialogContent({
             <X />
           </button>
         )}
-        <div className={cn("min-h-0 flex-1 overflow-y-auto px-5 py-4", sheet && "h-full", bodyClassName)}>{children}</div>
+        <div
+          className={cn(
+            "min-h-0 flex-1 overflow-y-auto px-5 py-4",
+            sheet && "h-full",
+            bodyClassName
+          )}
+        >
+          {children}
+        </div>
       </div>
     </dialog>
   )
@@ -259,7 +290,10 @@ export function DialogContent({
 export function DialogFooter({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn("-mx-5 -mb-4 mt-2 flex flex-col-reverse gap-2 border-t px-5 py-3 sm:flex-row sm:justify-end", className)}
+      className={cn(
+        "-mx-5 mt-2 -mb-4 flex flex-col-reverse gap-2 border-t px-5 py-3 sm:flex-row sm:justify-end",
+        className
+      )}
       {...props}
     />
   )

@@ -40,7 +40,12 @@ const variants: Record<CardVariant, string> = {
 }
 
 /** A container that groups related content and actions. */
-export function Card({ variant = "outline", interactive = false, className, ...props }: CardProps) {
+export function Card({
+  variant = "outline",
+  interactive = false,
+  className,
+  ...props
+}: CardProps) {
   return (
     <div
       className={cn(
@@ -65,7 +70,12 @@ export function CardHeader({ action, className, children, ...props }: CardHeader
 }
 
 export function CardTitle({ as: Heading = "h3", className, ...props }: CardTitleProps) {
-  return <Heading className={cn("text-md leading-6 font-semibold tracking-tight", className)} {...props} />
+  return (
+    <Heading
+      className={cn("text-md leading-6 font-semibold tracking-tight", className)}
+      {...props}
+    />
+  )
 }
 
 export function CardDescription({ className, ...props }: ComponentProps<"p">) {
@@ -77,5 +87,10 @@ export function CardContent({ className, ...props }: ComponentProps<"div">) {
 }
 
 export function CardFooter({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("flex items-center gap-2 border-t px-4 py-3", className)} {...props} />
+  return (
+    <div
+      className={cn("flex items-center gap-2 border-t px-4 py-3", className)}
+      {...props}
+    />
+  )
 }

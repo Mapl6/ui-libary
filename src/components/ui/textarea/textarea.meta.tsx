@@ -4,7 +4,8 @@ import { Textarea } from "./textarea"
 
 export default defineShowcase({
   name: "Textarea",
-  description: "A multi-line text field with auto-sizing, a character counter and validation states.",
+  description:
+    "A multi-line text field with auto-sizing, a character counter and validation states.",
   category: "forms",
   tags: ["multiline", "comment", "message", "form", "text area"],
   component: Textarea,

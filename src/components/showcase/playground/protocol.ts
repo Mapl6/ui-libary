@@ -11,5 +11,9 @@ export type FrameMessage =
   | { source: "ui-library"; type: "update"; patch: Args }
 
 export function isMessage<T extends { source: string }>(data: unknown): data is T {
-  return typeof data === "object" && data !== null && (data as { source?: unknown }).source === "ui-library"
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    (data as { source?: unknown }).source === "ui-library"
+  )
 }

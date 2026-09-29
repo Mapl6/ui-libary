@@ -11,7 +11,8 @@ const root = process.cwd()
 const allowedRoots = [path.join(root, "src/components/ui"), path.join(root, "docs")]
 
 export async function readRepoFile(relativePath: string) {
-  const absolute = path.resolve(root, relativePath)
+  // Allowed roots are listed in next.config.ts `outputFileTracingIncludes`; don't trace the whole repo.
+  const absolute = path.resolve(/* turbopackIgnore: true */ root, relativePath)
   if (!allowedRoots.some((allowed) => absolute.startsWith(allowed + path.sep))) {
     throw new Error(`Refusing to read ${relativePath}: outside of allowed content roots`)
   }
@@ -20,10 +21,19 @@ export async function readRepoFile(relativePath: string) {
 
 /** Example source without the leading doc comment (shown separately as description). */
 export function stripLeadingDocComment(source: string) {
-  return source.replace(/^(["']use client["'];?\s*\n)?\s*\/\*\*[\s\S]*?\*\/\s*\n/, (_, directive: string | undefined) => directive ?? "")
+  return source.replace(
+    /^(["']use client["'];?\s*\n)?\s*\/\*\*[\s\S]*?\*\/\s*\n/,
+    (_, directive: string | undefined) => directive ?? ""
+  )
 }
 
-export type Guide = { slug: string; title: string; description?: string; file: string; order: number }
+export type Guide = {
+  slug: string
+  title: string
+  description?: string
+  file: string
+  order: number
+}
 
 /** Guides are markdown files in /docs, ordered by an optional numeric prefix. */
 export async function getGuides(): Promise<Guide[]> {
@@ -38,7 +48,13 @@ export async function getGuides(): Promise<Guide[]> {
         .trim()
         .split(/\n\s*\n/)[0]
         ?.replace(/\s+/g, " ")
-      return { slug: file.replace(/^\d+[-_]/, "").replace(/\.md$/, ""), title, description, file: `docs/${file}`, order: index }
+      return {
+        slug: file.replace(/^\d+[-_]/, "").replace(/\.md$/, ""),
+        title,
+        description,
+        file: `docs/${file}`,
+        order: index,
+      }
     })
   )
 }
